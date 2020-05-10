@@ -2,7 +2,7 @@
 const Discord = require('discord.js')
 
 //connexion à discord central et répercution sur les serveurs autorisé
-const client = new Discord.Client()
+global.client = new Discord.Client()
 
 //état de l'initialisation du bot
 var ready=false;
@@ -25,10 +25,10 @@ var sqlite3 = require('sqlite3').verbose();
 const sqlite = require("./class/db.js")
 
 //récupération de l'objet monkey
-const monkeys = require("./class/monkey.js")
+global.monkeys = require("./class/monkey.js")
 
 //récupération de l'objet monkey
-const salons_m = require("./class/salon.js")
+global.salons_m = require("./class/salon.js")
 
 
 
@@ -72,20 +72,23 @@ fs.readdir("./Commandes/",(error,f)=>{
 			client.commands.set(commande.help.name, commande);
 
 		});
+	console.log("======================")
 })
 
 //chargement des fichiers Events js
 fs.readdir("./Events/",(error,f)=>{
 	if(error) console.log(error);
-	console.log(`${f} events chargée!`);
+	
 
 	f.forEach((f)=>{
+		console.log(`${f} events chargée!`);
 		const events = require(`./Events/${f}`);
 		const event = f.split(".")[0]
 
 		client.on(event,events.bind(null,client))
 
 	});
+	console.log("======================")
 })
 
 //chargement des fichiers MP3
@@ -99,110 +102,22 @@ rep_mp3.forEach((rep)=>{
 		sound_list[count]="./mp3/"+rep+"/"+sound;
 		count++;
 	})
-
-	
 })
 
-//prototype de fonction permettant d'agir si un membre de fait pas le bon jeux dans un salon réservé à un jeu spécifique
-setInterval(function() {
-	/*for (const property in monkeys_list)
-	{
-		if (monkeys_list[property].game!=="inc" && monkeys_list[property].salon!=="inc")
-		{
-			if(monkeys_list[property].salon==="702600937369370624" && monkeys_list[property].game!=="Star Citizen")
-			{
-				monkeys_list[property].alert++;
+//chargement des fichiers pour les commandes cycliques
+fs.readdir("./Cycle/",(error,f)=>{
+	if(error) console.log(error);
 
-				
-				let users = client.users.cache;
-				console.log(client.users);
-				let user=users.get(property);
+	let cycles=f.filter(f=>f.split(".").pop()==="js");
+	if(cycles.length<=0)return console.log("Aucune commande cycliques trouvée !")
 
-				if(monkeys_list[property].alert==1)
-				{
-					user.send("Attention, vous êtes dans un salon réservé aux joueurs de Star Citizen, mais votre jeux n'est pas actif. Premier avertissement.");
-					monkeys_list[property].time = Date.now();
-					monkeys_list[property].date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-				}
-				if(monkeys_list[property].alert==12)
-				{
-					user.send("Attention, vous êtes dans un salon réservé aux joueurs de Star Citizen, mais votre jeux n'est pas actif.");
-					monkeys_list[property].time = Date.now();
-					monkeys_list[property].date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-				}
-				if(monkeys_list[property].alert==24)
-				{
-					user.send("Attention, vous êtes dans un salon réservé aux joueurs de Star Citizen, mais votre jeux n'est pas actif. Dernier avertissement.");
-					monkeys_list[property].time = Date.now();
-					monkeys_list[property].date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-				}
-				if(monkeys_list[property].alert==36)
-				{
-					user.send("Attention, vous êtes dans un salon réservé aux joueurs de Star Citizen, mais votre jeux n'était pas actif. Expulsion du channel.");
-					monkeys_list[property].time = Date.now();
-					monkeys_list[property].date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-				}
-			}
-			if(monkeys_list[property].salon==="702600937369370624" && monkeys_list[property].game==="Star Citizen")
-			{
-				monkeys_list[property].alert=0;
-			}
-		}
-	}*/
-}, 60000);
+		cycles.forEach((f) => {
+			let cycle = require(`./Cycle/${f}`);
+			console.log(`${f} commande cycliques chargée!`);
+			//client.commands.set(cycle.help.name, cycle);
 
+		});
+	console.log("======================")
+})
 
-//mise à jours de la base de données des salons et membres
-setInterval(async function() {
-	
-	//parcours des salons
-	let channels = client.channels.cache;
-	for(let channel of channels.values())
-	{
-		//on prépare l'objet monkeys
-		let salon= new salons_m();
-		//console.log("salon : "+salon)
-		
-		//on recherche un correspondance avec un salon existant
-		let info = await salon.search_s(channel["id"]).then()
-		//si le salon n'exsite pas on le créé
-		if( info === null){result = await salon.create_s(channel).then();}
-		//sinon on le met à jours de toute façon
-		else{result = await salon.update_s(channel).then();}
-
-		salon_list[channel["id"]]=salon;
-
-		//console.log(salon[channel["id"]]);
-	}
-
-	let users = client.users.cache;
-	for(let usr of users.values())
-	{
-		if(monkeys_list[usr.id].jeton<5)
-		{
-			//on prépare l'objet monkeys
-			let monkey= new monkeys();
-
-			//on recherche un correspondance avec un utilisateur existant
-			let info = await monkey.search_m(usr.id).then()
-			//si le membre n'existe pas, on le créé immédiatement
-			if( info === null)
-			{
-				result = await monkey.create_m(usr).then()
-				console.log(`création du membre ${usr.id}`)
-			}
-			//creation du tableau de mise à jour
-			let new_data={};
-			let jeton=monkeys_list[usr.id].jeton+1;
-			new_data.jeton=jeton;
-			new_data.time = Date.now();
-			new_data.date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-
-			//mise à jour des donnée du membres
-			info = await monkey.update_m(new_data).then()
-			monkeys_list[usr.id]=monkey;
-		}
-		
-	}
-}, 60000);
 
