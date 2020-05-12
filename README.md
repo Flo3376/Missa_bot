@@ -1,4 +1,5 @@
 # Missa_bot
+> Liste des paquets utilisés pour npm
 ``` 
 ├── @discordjs/opus@0.1.0
 ├── bluebird@3.7.2
