@@ -3,11 +3,6 @@ const moment = require ("moment")
 
 module.exports.run = async (client,message, args) =>{
 	const membre= message.mentions.members.first() || message.member;
-	//if(!membre) return message.channel.send(`Veuillez mentionner un utilisateur !`)
-	//console.log(membre);
-	//console.log(membre.guild.members);
-
-	//console.log(membre.user.displayAvatarURL())
 
 	message.author.send({
 		embed:{
@@ -22,31 +17,30 @@ module.exports.run = async (client,message, args) =>{
 				value : membre.id
 			},
 			{
-				name:"Crée le : ",
-				value : moment .utc(membre.user.createdAT).format('LL')
+				name:"Dans le salon : ",
+				value : `${salon_list[monkeys_list[membre.id].salon].name}`
 			}
 			,
 			{
-				name:"Jeux : ",
-				value : `${membre.user.presence.game? membre.GuildMember.presences.game.name: "Aucun jeu"}`
+				name:"Jeu / activitée: ",
+				value : `${monkeys_list[membre.id].game}`
 			}
 			,
 			{
 				name:"Nombre de jetons : ",
-				value : `${membre.user.presence.game? membre.GuildMember.presences.game.name: "Aucun jeu"}`
+				value : `${monkeys_list[membre.id].jeton}`
 			}
 			,
 			{
-				name:"Rejoins : ",
-				value : moment .utc(membre.joinedAT).format('LL')
+				name:"Niveau d'alerte : ",
+				value : `${monkeys_list[membre.id].alert}`
 			}
 			],
 			footer: {
-				text:`information de l'utilisateur ${membre.user.nickname}`
+				text:`Fin du rapport`
 			}
 		}
 	})
-
 };
 
 module.exports.help ={

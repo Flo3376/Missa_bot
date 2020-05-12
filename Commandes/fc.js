@@ -51,11 +51,24 @@ module.exports.run = async (client,message,args) =>{
 					text[mes_test]=list_ship;
 				}
 			})
+			if(message.channel.type ==="dm")
+			{
+				console.log("dm")
+				text.forEach((bloc)=>{
+					message.author.createDM().then(channel => {message.channel.send(bloc)})
+					
+					//message.author.send(bloc);
 
-			text.forEach((bloc)=>{
-				message.reply(bloc);
+				})
+			}
+			else{
+				console.log("non dm")
+				text.forEach((bloc)=>{
+					message.reply(bloc);
 
-			})
+				})
+			}
+			
 		})
 	
 };

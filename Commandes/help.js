@@ -12,7 +12,7 @@ module.exports.run = async (client,message, args) =>{
 			},
 			{
 				name:"+fc [id_ de l'appareil][argent disponible]",
-				value : "Vous retourner les produits les plus rentables à tradder avec les conditions que vous avez indiqué.\n ex +fc 8 5000\n les id sont disponible en tapant la commande +ship_list"
+				value : "Vous retourner les produits les plus rentables à tradder avec les conditions que vous avez indiqué.\n ex +fc 8 5000\n les id sont disponibles en tapant la commande +ship_list"
 			},
 			{
 				name:"+help : ",
@@ -20,7 +20,7 @@ module.exports.run = async (client,message, args) =>{
 			},
 			{
 				name:"+jeton : ",
-				value : "Vous indique le nombre de jetons restant pour mettre de l'ambiance"
+				value : "Vous indique le nombre de jetons restants pour mettre de l'ambiance"
 			},
 			{
 				name:"+kick [utilisateur][raison (optinnelle)]",

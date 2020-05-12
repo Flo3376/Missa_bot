@@ -1,5 +1,5 @@
 //lancement de la lib discord
-const Discord = require('discord.js')
+global.Discord = require('discord.js')
 
 //connexion à discord central et répercution sur les serveurs autorisé
 global.client = new Discord.Client()
@@ -9,6 +9,7 @@ var ready=false;
 
 //lancement de la lib de lecture distante
 const fs=require('fs');
+const util = require('util');
 
 //lancement et création des variable de la lib youtube
 const ytdl = require('ytdl-core');
