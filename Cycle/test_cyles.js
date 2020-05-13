@@ -1,6 +1,6 @@
 
-//mise à jours de la base de données des salons et membres
+//envoie d'un ping sur la console pour vérifier que le cyclique fonctionne
 setInterval(async function() {
 	
-	//console.log("bip")
+	//console.log("ping")
 }, 10000);
