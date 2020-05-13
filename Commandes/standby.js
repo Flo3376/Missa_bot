@@ -15,5 +15,7 @@ module.exports.run = async(client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "standby"
+	name: "standby",
+	info: `+standby\nPermet au bot de rester ou non dans un salon aprés son action sonore`,
+	admin: true,
 };

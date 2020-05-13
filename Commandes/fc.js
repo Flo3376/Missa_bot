@@ -74,5 +74,7 @@ module.exports.run = async (client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "fc"
+	name: "fc",
+	info: `+fc [id_ de l'appareil] [argent disponible]\n Vous retourner les produits les plus rentables à tradder avec les conditions que vous avez indiqué.\n ex +fc 8 5000\n les id sont disponibles en tapant la commande +ship_list`,
+	admin: false,
 };

@@ -117,5 +117,7 @@ module.exports.run = async (client,message, args) =>{
 };
 
 module.exports.help ={
-	name: "ask"
+	name: "ask",
+	info: `+ask [Nom du joueur]\nPermet d'accéder au dossier spectrum d'un membre, exemple: +ask gm_bob`,
+	admin: true,
 };

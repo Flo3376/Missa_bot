@@ -10,5 +10,7 @@ module.exports.run = async (message, serverQueue) =>{
 };
 
 module.exports.help ={
-	name: "skip"
+	name: "skip",
+	info: `+skip\nLancera la musique suivante de la playlist`,
+	admin: false,
 };

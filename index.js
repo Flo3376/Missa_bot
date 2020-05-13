@@ -57,6 +57,9 @@ global.salon_auto_play=["704788656896081990","704432846755987500"];
 //liste des salons où missa souhaitera la bienvenue
 global.salon_auto_says=["705683831247601665","706790312441413663"];
 
+//tableau du createur d'aide
+global.helps=[];
+
 
 
 client.commands = new Discord.Collection();
@@ -71,10 +74,19 @@ fs.readdir("./Commandes/",(error,f)=>{
 			let commande = require(`./Commandes/${f}`);
 			console.log(`${f} commande chargée!`);
 			client.commands.set(commande.help.name, commande);
+			let help_command=[];
+			help_command["name"]=commande.help.name;
+			help_command["info"]=commande.help.info;
+			help_command["admin"]=commande.help.admin;
+			helps.push(help_command);
 
 		});
 	console.log("======================")
+	console.log(helps);
+	console.log("======================")
 })
+
+
 
 //chargement des fichiers Events js
 fs.readdir("./Events/",(error,f)=>{
@@ -115,8 +127,6 @@ fs.readdir("./Cycle/",(error,f)=>{
 		cycles.forEach((f) => {
 			let cycle = require(`./Cycle/${f}`);
 			console.log(`${f} commande cycliques chargée!`);
-			//client.commands.set(cycle.help.name, cycle);
-
 		});
 	console.log("======================")
 })

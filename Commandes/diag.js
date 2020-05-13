@@ -10,5 +10,7 @@ module.exports.run = async(client,message,args) =>{
 
 };
 module.exports.help ={
-		name: "diag"
+		name: "diag",
+		info: `+diag\n Retourne dans les consoles les tableaux monkeys_list et salon_list`,
+	admin: true,
 	};

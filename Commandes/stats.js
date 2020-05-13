@@ -44,5 +44,7 @@ module.exports.run = async (client,message, args) =>{
 };
 
 module.exports.help ={
-	name: "stats"
+	name: "stats",
+	info: `+stats\nVous permettra de connaitre les informations de membre sur discord`,
+	admin: false,
 };

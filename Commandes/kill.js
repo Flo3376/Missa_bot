@@ -36,5 +36,7 @@ module.exports.run = async(client,message,args) =>{
 	};
 
 	module.exports.help ={
-		name: "kill"
+		name: "kill",
+	info: `+kill [utilisateur][raison (optionelle)]\nEnvoie un utilisateur dans le salon AFK, ex: +kill @un_joueur 'va te calmer 30 secondes'`,
+	admin: true,
 	};

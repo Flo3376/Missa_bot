@@ -29,8 +29,10 @@ module.exports.run = async(client,message,args) =>{
 
 	message.channel.send(`${member.user.username} est kick par ${message.author.username}, pour la raison suivante ${raison}`);
 	message.mentions.users.first().send(`${member.user.username}, Vous avez été expulsé du serveur **${message.guild.name} par ${message.author.username}, pour la raison suivante '${raison}'`);
-	};
+};
 
-	module.exports.help ={
-		name: "kick"
-	};
+module.exports.help ={
+	name: "kick",
+	info: `+kick [utilisateur] [raison (optinnelle)]\nDéconnecte un utilisateur ex: +kick @un_joueur tu me casses les couilles`,
+	admin: true,
+};

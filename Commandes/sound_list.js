@@ -32,5 +32,7 @@ module.exports.run = async (client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "sound_list"
+	name: "sound_list",
+	info: `+sound_list\nVous donnera la liste compléte des extraits utilisable avec la commande +rh`,
+	admin: false,
 };

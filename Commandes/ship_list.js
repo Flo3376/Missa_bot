@@ -43,5 +43,7 @@ module.exports.run = async(client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "ship_list"
+	name: "ship_list",
+	info: `+ship_list\nVous donnera la liste des vaisseaux avec leur id unique pris en charge par le site https://mysctools.ovh/`,
+	admin: false,
 };

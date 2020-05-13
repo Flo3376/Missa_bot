@@ -10,5 +10,7 @@ module.exports.run = async (message, serverQueue) =>{
 };
 
 module.exports.help ={
-	name: "stop"
+	name: "stop",
+	info: `+stop\nCoupe la lecture de fichier audio youtube et effacera la playlist`,
+	admin: false,
 };

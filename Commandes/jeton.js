@@ -4,5 +4,7 @@ module.exports.run = async (client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "jeton"
+	name: "jeton",
+	info: `+jeton\nVous indique le nombre de jetons restants pour mettre de l'ambiance`,
+	admin: false,
 };

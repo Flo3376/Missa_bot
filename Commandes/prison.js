@@ -53,5 +53,7 @@ module.exports.run = async (client,message, args) =>{
 };
 
 module.exports.help ={
-	name: "prison"
+	name: "prison",
+	info: `+prison\nRetournera les informations connues sur les prisons`,
+	admin: false,
 };

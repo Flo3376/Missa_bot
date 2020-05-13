@@ -77,5 +77,7 @@ module.exports.run = async (message, serverQueue) =>{
 };
 
 module.exports.help ={
-	name: "play"
+	name: "play",
+	info: `+play [lien youtube]\nLancera la lecture **audio** d'un lien youtubre, ex : +play https://www.youtube.com/watch?v=vb_k04U3pNs .Attention Missa ne peux être que sur un salon. Si une musique est déjà en cours, celle que vous proposerez sera mis playlist.`,
+	admin: true,
 };

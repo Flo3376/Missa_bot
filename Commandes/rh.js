@@ -79,5 +79,7 @@ module.exports.run = async (client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "rh"
+	name: "rh",
+	info: `+rh [numéro du préset]\nJouera un extrait de film. La liste des extraits est disponible en faisant +sound_list bruitage.., ex: +rh 5`,
+	admin: true,
 };

@@ -28,5 +28,7 @@ module.exports.run = async (client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "says"
+	name: "says",
+	info: `+says une phrase\nLe bot rentrera dans le salon ou vous êtes et dira vocalement votre phrase`,
+	admin: true,
 };
