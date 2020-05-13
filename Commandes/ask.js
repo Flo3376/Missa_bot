@@ -1,9 +1,9 @@
-const Discord = require ("discord.js");
-const moment = require ("moment")
+const Discord = require("discord.js");
+const moment = require("moment")
 
 
 
-module.exports.run = async (client,message, args) =>{
+module.exports.run = async (client, message, args) => {
 
 	//on charge la methode request pour faire une demande post
 	const request = require('request')
@@ -15,7 +15,7 @@ module.exports.run = async (client,message, args) =>{
 	const cheerio = require('cheerio');
 
 	//construction du lien à parser
-	const url = 'https://robertsspaceindustries.com/citizens/'+args[0];
+	const url = 'https://robertsspaceindustries.com/citizens/' + args[0];
 
 	const fs = require('fs');
 
@@ -27,35 +27,31 @@ module.exports.run = async (client,message, args) =>{
 				console.error(error)
 				return
 			}
-			
+
 			const $ = cheerio.load(data);
 
-			//création des divers tableaux où seront stocké les image lien et info
+			//création des divers tableaux où seront stockés les images lien et info
 			let output = [];
-			let images=[];
-			let links=[]
+			let images = [];
+			let links = []
 
 			//recherche des images et ajout des données dans le tableau img
-			$("img").each(function(i, image) {
+			$("img").each(function (i, image) {
 
-				images.push( $(image).attr('src'));
+				images.push($(image).attr('src'));
 			});
 
 			//recherche des lient et ajout des données dans le tableau link
-			$("a").each(function(i, link) {
+			$("a").each(function (i, link) {
 				//plusieurs méthode de vérification en cascade (obligatoirement en cascade sinon plantage)
 				//pour trouver les liens ainsi que leur nom affiché, Home => /home
-				if(link.hasOwnProperty('children'))
-				{
-					if(link.children.hasOwnProperty(0))
-					{
-						if(link.children[0].hasOwnProperty("data"))
-						{
-							if(!link.children[0].data.includes("\n"))
-							{
-								let sub_links=[];
-								sub_links["name"]=link.children[0].data;
-								sub_links["url"]=$(link).attr('href');
+				if (link.hasOwnProperty('children')) {
+					if (link.children.hasOwnProperty(0)) {
+						if (link.children[0].hasOwnProperty("data")) {
+							if (!link.children[0].data.includes("\n")) {
+								let sub_links = [];
+								sub_links["name"] = link.children[0].data;
+								sub_links["url"] = $(link).attr('href');
 								links.push(sub_links);
 							}
 						}
@@ -64,7 +60,7 @@ module.exports.run = async (client,message, args) =>{
 			});
 
 			//recherche des différent texte contenu dans des spans ou div, la page à parser n'utilisant pas les id, le contenu peu flotter
-			$( ".value" ).each( (i, elem ) => {
+			$(".value").each((i, elem) => {
 				output.push(elem.children[0].data);
 			});
 			console.log(images.length);
@@ -75,21 +71,17 @@ module.exports.run = async (client,message, args) =>{
 			console.log(links);
 
 			//si aucune images n'est détectées, c'est que la page n'a pas trouvé de correspondance, mais elle à répondu correctement
-			if(images.length===0)
-			{
+			if (images.length === 0) {
 				//renvoie d'un message de non correspondance
 				message.channel.send(`Aucunes correspondances trouvées pour ${args[0]}`)
-				
-			}
-			else
-			{
+
+			} else {
 				//s'il y a moin de 3 images, le joueur n'est pas affilié à une corpo
-				if(images.length<3)
-				{
+				if (images.length < 3) {
 					//nettoyage des retours à la lignes et des espaces en trop
-					output[5]=output[5].replace(/  /g,' ')
-					output[5]=output[5].replace(/\n/g, '')
-					
+					output[5] = output[5].replace(/  /g, ' ')
+					output[5] = output[5].replace(/\n/g, '')
+
 					//chargement du template (méthode provisoire car dangereuse avec l'utilisation de la méthode eval())
 					fs.readFile("./embed/spectrum2.js", "utf-8", (err, data) => {
 						//interprétation du template
@@ -99,10 +91,9 @@ module.exports.run = async (client,message, args) =>{
 					});
 				}
 				//s'il y a plus de 2 images c'est que le membre est affilié à une corpo
-				if(images.length>2)
-				{
-					output[8]=output[8].replace(/  /g,' ')
-					output[8]=output[8].replace(/\n/g, '')
+				if (images.length > 2) {
+					output[8] = output[8].replace(/  /g, ' ')
+					output[8] = output[8].replace(/\n/g, '')
 
 					//chargement du template (méthode provisoire car dangereuse avec l'utilisation de la méthode eval())
 					fs.readFile("./embed/spectrum.js", "utf-8", (err, data) => {
@@ -116,7 +107,7 @@ module.exports.run = async (client,message, args) =>{
 		})
 };
 
-module.exports.help ={
+module.exports.help = {
 	name: "ask",
 	info: `+ask [Nom du joueur]\nPermet d'accéder au dossier spectrum d'un membre, exemple: +ask gm_bob`,
 	admin: true,
