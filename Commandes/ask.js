@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const moment = require("moment")
 
-
+//test de lecture alpha
 
 module.exports.run = async (client, message, args) => {
 
