@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
 	const cheerio = require('cheerio');
 
 	//construction du lien à parser
-	const url = 'https://robertsspaceindustries.com/citizens/' + args[0];
+	const url = 'https://robertsspaceindustries.com/citizens/'+ args[0];
 
 	const fs = require('fs');
 
@@ -75,7 +75,8 @@ module.exports.run = async (client, message, args) => {
 				//renvoie d'un message de non correspondance
 				message.channel.send(`Aucunes correspondances trouvées pour ${args[0]}`)
 
-			} else {
+			}
+			else {
 				//s'il y a moin de 3 images, le joueur n'est pas affilié à une corpo
 				if (images.length < 3) {
 					//nettoyage des retours à la lignes et des espaces en trop

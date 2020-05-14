@@ -8,8 +8,8 @@ global.client = new Discord.Client()
 var ready=false;
 
 //lancement de la lib de lecture distante
-const fs=require('fs');
-const util = require('util');
+global.fs=require('fs');
+global.util = require('util');
 
 //lancement et création des variable de la lib youtube
 const ytdl = require('ytdl-core');
@@ -82,8 +82,8 @@ fs.readdir("./Commandes/",(error,f)=>{
 
 		});
 	console.log("======================")
-	console.log(helps);
-	console.log("======================")
+	//console.log(helps);
+	//console.log("======================")
 })
 
 
