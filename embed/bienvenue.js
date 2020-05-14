@@ -1,6 +1,6 @@
 var my_embed={
   "embed": {
-    "title": "Bonjour🖐",
+    "title": `Bonjour ${usr['name']}`,
     "description": "Bienvenue chez les **Galactic Monkeys.** \n\n >Tout d'abord, merci de ta visite.\n\n Un **Administrateur** ou un **GM** viendra t'accueillir d'ici quelques minutes, si ce n'est pas le cas, n'hésites pas à leur envoyer un message en privé. Tu peux aussi revenir à partir de 20h00, il y a toujours des poilus qui sont présents.\n\n\nPour patienter, tu peux aller visiter nos liens officiels :",
     "url": "https://gmonkeys.org/",
     "color": 15179008,
