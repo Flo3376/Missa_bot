@@ -94,7 +94,8 @@ module.exports = async(client,message)=>{
 		}*/
 		else
 		{
-			cmd.run(client,message,args);
+			return message.author.send("Impossible d'executer la commande pour le moment circuit en travaux");
+			//cmd.run(client,message,args);
 		}
 	}
 

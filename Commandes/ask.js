@@ -1,5 +1,5 @@
-const Discord = require("discord.js");
-const moment = require("moment")
+//const Discord = require("discord.js");
+//const moment = require("moment")
 
 //test de lecture alpha
 
@@ -63,13 +63,7 @@ module.exports.run = async (client, message, args) => {
 			$(".value").each((i, elem) => {
 				output.push(elem.children[0].data);
 			});
-			console.log(images.length);
-			console.log(images);
-			console.log(output.length);
-			console.log(output);
-			console.log(links.length);
-			console.log(links);
-
+			
 			//si aucune images n'est détectées, c'est que la page n'a pas trouvé de correspondance, mais elle à répondu correctement
 			if (images.length === 0) {
 				//renvoie d'un message de non correspondance
@@ -87,12 +81,12 @@ module.exports.run = async (client, message, args) => {
 					fs.readFile("./embed/spectrum2.js", "utf-8", (err, data) => {
 						//interprétation du template
 						eval(data)
-						//envoie du message avec la réponse
-						message.channel.send(my_embed)
+						//envoie du message privée avec la réponse
+						message.author.send(my_embed)
 					});
 				}
 				//s'il y a plus de 2 images c'est que le membre est affilié à une corpo
-				if (images.length > 2) {
+				else if (images.length > 2) {
 					output[8] = output[8].replace(/  /g, ' ')
 					output[8] = output[8].replace(/\n/g, '')
 
@@ -100,8 +94,8 @@ module.exports.run = async (client, message, args) => {
 					fs.readFile("./embed/spectrum.js", "utf-8", (err, data) => {
 						//interprétation du template
 						eval(data)
-						//envoie du message avec la réponse
-						message.channel.send(my_embed)
+						//envoie du message privée avec la réponse
+						message.author.send(my_embed)
 					});
 				}
 			}
@@ -112,4 +106,5 @@ module.exports.help = {
 	name: "ask",
 	info: `+ask [Nom du joueur]\nPermet d'accéder au dossier spectrum d'un membre, exemple: +ask gm_bob`,
 	admin: true,
+	channel: "dm"
 };
