@@ -20,10 +20,10 @@ global.serverQueue ;
 const config  =  require ( "./config.json" ) ;
 
 //chargement de la lib mysql_lite3
-var sqlite3 = require('sqlite3').verbose();
+global.sqlite3 = require('sqlite3').verbose();
 
 //récupération de l'objet db
-const sqlite = require("./class/db.js")
+global.sqlite = require("./class/db.js")
 
 //récupération de l'objet monkey
 global.monkeys = require("./class/monkey.js")

@@ -1,5 +1,3 @@
-const Canvas = require('canvas');
-
 module.exports.run = async (client,message,args) =>{
 	const member= message.mentions.members.first() || message.member;
 	let data="";

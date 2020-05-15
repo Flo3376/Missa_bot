@@ -1,4 +1,3 @@
-//const sqlite3 = require('sqlite3').verbose()
 
 //récupération de l'objet db
 const sqlite = require("./../class/db.js")

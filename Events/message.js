@@ -30,6 +30,18 @@ module.exports = async(client,message)=>{
 	//si la commande n'exsite pas
 	if(!cmd) return message.channel.send("Et encore un qui n'est pas capable de saisir une commande valide, ça me fatigue!, Tapes +help pour avoir les commandes actives");;
 	
+	if(cmd.help.channel ==="in_serv" && message.channel.type ==="dm" )
+	{
+		return message.author.send("Cette commande ne peut pas être utilisée en message privé");
+	}
+	else
+	{
+		cmd.run(client,message,args);
+	}
+
+
+
+
 	//si la commande concerne la lecture de fichier
 	if(commande==='play' || commande==='skip' || commande==='stop')
 	{
@@ -76,10 +88,10 @@ module.exports = async(client,message)=>{
 		{
 			return message.channel.send("Les commandes demandant l'accés à la capacité vocal sont interdites en message privé");
 		}
-		else if((commande==='stats') && message.channel.type ==="dm")
+		/*else if((commande==='stats') && message.channel.type ==="dm")
 		{
 			return message.channel.send("Cette commande ne peut pas être appelée depuis un message privé");
-		}
+		}*/
 		else
 		{
 			cmd.run(client,message,args);

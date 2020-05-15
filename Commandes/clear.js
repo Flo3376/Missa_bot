@@ -1,4 +1,4 @@
-const Discord = require ("discord.js");
+//const Discord = require ("discord.js");
 
 //si la commande clear est appelé
 module.exports.run = async(client,message,args) =>{
@@ -25,5 +25,6 @@ module.exports.run = async(client,message,args) =>{
 module.exports.help ={
 	name: "clear",
 	info: `+clear [un nombre]\n Supprime X message dans le salon textuel en cours, ex: +clear 50`,
-	admin: true,
+	admin: false,
+	channel: "in_serv"
 };
