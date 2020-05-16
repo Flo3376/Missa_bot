@@ -1,4 +1,3 @@
-const Discord = require ("discord.js");
 module.exports.run = async (message, serverQueue) =>{
 	if (!message.member.voice.channel)
 		return message.author.send(
@@ -13,4 +12,5 @@ module.exports.help ={
 	name: "skip",
 	info: `+skip\nLancera la musique suivante de la playlist`,
 	admin: false,
+	channel: "in_serv",
 };

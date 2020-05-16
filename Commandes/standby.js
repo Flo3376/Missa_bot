@@ -18,4 +18,5 @@ module.exports.help ={
 	name: "standby",
 	info: `+standby\nPermet au bot de rester ou non dans un salon aprés son action sonore`,
 	admin: true,
+	admin: "dm",
 };

@@ -1,15 +1,3 @@
-const Discord = require ("discord.js");
-
-//chargement de la lib mysql_lite3
-var sqlite3 = require('sqlite3').verbose();
-
-//récupération de l'objet db
-const sqlite = require("./../class/db.js")
-
-//récupération de l'objet monkey
-//const monkeys = require("./../class/monkey.js")
-
-
 module.exports.run = async (client,message,args) =>{
 	const membre= message.mentions.members.first() || message.member;
 		console.log(message.content)
@@ -81,5 +69,6 @@ module.exports.run = async (client,message,args) =>{
 module.exports.help ={
 	name: "rh",
 	info: `+rh [numéro du préset]\nJouera un extrait de film. La liste des extraits est disponible en faisant +sound_list bruitage.., ex: +rh 5`,
-	admin: true,
+	admin: false,
+	channel: "in_serv",
 };

@@ -35,4 +35,6 @@ module.exports.help ={
 	name: "kick",
 	info: `+kick [utilisateur] [raison (optinnelle)]\nDéconnecte un utilisateur ex: +kick @un_joueur tu me casses les couilles`,
 	admin: true,
+	channel: "in_serv",
+
 };

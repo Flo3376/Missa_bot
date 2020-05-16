@@ -1,6 +1,3 @@
-var googleTTS = require('google-tts-api');
-
-//si la commande says est utilisé
 module.exports.run = async (client,message,args) =>{
 	//on supprime +says pour qu'il ne soit pas dit
 	text=message.content.replace('+says ', '');
@@ -19,8 +16,6 @@ module.exports.run = async (client,message,args) =>{
 			//on se déconnecte
 			dispatcher.on('finish', () => {voiceChannel.leave()});
 		})
-
-
 	})
 	.catch(function (err) {
 		console.error(err.stack);
@@ -31,4 +26,5 @@ module.exports.help ={
 	name: "says",
 	info: `+says une phrase\nLe bot rentrera dans le salon ou vous êtes et dira vocalement votre phrase`,
 	admin: true,
+	channel: "in_serv",
 };

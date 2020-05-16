@@ -13,4 +13,5 @@ module.exports.help ={
 	name: "stop",
 	info: `+stop\nCoupe la lecture de fichier audio youtube et effacera la playlist`,
 	admin: false,
+	channel: "in_serv",
 };

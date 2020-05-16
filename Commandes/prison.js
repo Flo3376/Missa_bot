@@ -1,6 +1,6 @@
 const Discord = require ("discord.js");
 module.exports.run = async (client,message, args) =>{
-	message.author.send({
+	message.author.reply({
 		embed:{
 			color: 3447003,
 			title:`**Informations sur les prisons**`,
@@ -56,4 +56,5 @@ module.exports.help ={
 	name: "prison",
 	info: `+prison\nRetournera les informations connues sur les prisons`,
 	admin: false,
+	channel: "both",
 };

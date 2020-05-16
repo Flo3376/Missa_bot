@@ -1,5 +1,3 @@
-const Discord = require ("discord.js");
-
 module.exports.run = async(client,message,args) =>{
 	const request = require('request')
 	let text=[];
@@ -34,11 +32,12 @@ module.exports.run = async(client,message,args) =>{
 					text[mes_test]=list_ship;
 				}
 			})
-			//envoie de plusieurs message en fonction du nombre de fois que les 2000 ont été dépassé
+			
 			text.forEach((bloc)=>{
-			message.author.send(bloc);
+					message.author.send(bloc);
 
-		})
+				})
+			
 	})
 };
 
@@ -46,4 +45,5 @@ module.exports.help ={
 	name: "ship_list",
 	info: `+ship_list\nVous donnera la liste des vaisseaux avec leur id unique pris en charge par le site https://mysctools.ovh/`,
 	admin: false,
+	channel: "both"
 };

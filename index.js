@@ -12,12 +12,16 @@ global.fs=require('fs');
 global.util = require('util');
 
 //lancement et création des variable de la lib youtube
-const ytdl = require('ytdl-core');
+global.ytdl = require('ytdl-core');
 global.queue = new Map();
 global.serverQueue ;
 
+//lancement la lib google traduction
+global.googleTTS = require('google-tts-api');
+
+
 //récupération de la configuration
-const config  =  require ( "./config.json" ) ;
+global.config  =  require ( "./config.json" ) ;
 
 //chargement de la lib mysql_lite3
 global.sqlite3 = require('sqlite3').verbose();

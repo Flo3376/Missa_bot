@@ -1,8 +1,3 @@
-//const Discord = require("discord.js");
-//const moment = require("moment")
-
-//test de lecture alpha
-
 module.exports.run = async (client, message, args) => {
 
 	//on charge la methode request pour faire une demande post
@@ -82,7 +77,7 @@ module.exports.run = async (client, message, args) => {
 						//interprétation du template
 						eval(data)
 						//envoie du message privée avec la réponse
-						message.author.send(my_embed)
+						message.reply(my_embed)
 					});
 				}
 				//s'il y a plus de 2 images c'est que le membre est affilié à une corpo
@@ -95,7 +90,7 @@ module.exports.run = async (client, message, args) => {
 						//interprétation du template
 						eval(data)
 						//envoie du message privée avec la réponse
-						message.author.send(my_embed)
+						message.reply(my_embed)
 					});
 				}
 			}

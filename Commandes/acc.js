@@ -5,7 +5,7 @@ module.exports.run = async (client,message,args) =>{
 	fs.readFile("./embed/bienvenue.js", "utf-8", (err, data) => {
 		//console.log(data)
 		eval(data)
-		message.channel.send(my_embed)
+		message.reply(my_embed)
 	});
 
 };
@@ -16,4 +16,5 @@ module.exports.help ={
 	name: "acc",
 	info: `+acc\nSimule l'arrivé d'un joueur`,
 	admin: true,
+	channel: "in_serv"
 };

@@ -1,11 +1,4 @@
 //si un event guildMemberAdd arrive (un nouveau membre rejoint le discord)
-
-//chargement de la lib mysql_lite3
-//var sqlite3 = require('sqlite3').verbose();
-
-//récupération de l'objet db
-//const sqlite = require("./../class/db.js")
-
 module.exports = async(member)=>{
 
 	//on parcours les membres que nous retourne l'api discord
@@ -17,8 +10,8 @@ module.exports = async(member)=>{
 		let monkey= new monkeys();
 		
 		//on recherche un correspondance avec un utilisateur existant
-		
 		info = await monkey.search_m(usr['id']).then()
+		//si pas d'info on le créé et on lui suite la bienvenue
 		if( info === null)
 		{
 			result = await monkey.create_m(usr).then();
