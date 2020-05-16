@@ -1,17 +1,17 @@
 //lancement de la lib de lecture distante
-const fs=require('fs');
+//const fs=require('fs');
 
 //chargement de la lib mysql_lite3
-var sqlite3 = require('sqlite3').verbose();
+//var sqlite3 = require('sqlite3').verbose();
 
 //récupération de l'objet db
-const sqlite = require("./../class/db.js")
+//const sqlite = require("./../class/db.js")
 
 //récupération de l'objet monkey
-const monkeys = require("./../class/monkey.js")
+//const monkeys = require("./../class/monkey.js")
 
 //récupération de l'objet monkey
-const salons_m = require("./../class/salon.js")
+//const salons_m = require("./../class/salon.js")
 
 
 //si un event on ready arrive arrive (le boot a démarré et s'est connecté avec succés)

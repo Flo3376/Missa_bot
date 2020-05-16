@@ -32,13 +32,13 @@ module.exports = async(client,oldPresence, newPresence)=>{
 					//si le joueur n'as pas changé son peudo, nickname n'exsite pas, il faut utilisé username					
 					if(oldPresence.member.nickname !== null && monkeys_list[oldPresence.userID].game!=="inc")
 					{
-						console.log(oldPresence.member.nickname+" a quité l'activitée : "+activity.name);
+						//console.log(oldPresence.member.nickname+" a quité l'activitée : "+activity.name);
 					}
 					else
 					{
 						if (monkeys_list[oldPresence.userID].game!== "inc")
 						{
-							console.log(old_users_data.username+" a quité l'activitée : "+activity.name);
+							//console.log(old_users_data.username+" a quité l'activitée : "+activity.name);
 						}
 					}
 
@@ -67,13 +67,13 @@ module.exports = async(client,oldPresence, newPresence)=>{
 
 					if(newPresence.member.nickname !== null && monkeys_list[newPresence.userID].game!=="inc")
 					{
-						console.log(newPresence.member.nickname+" a commencé l'activitée : "+activity.name);
+						//console.log(newPresence.member.nickname+" a commencé l'activitée : "+activity.name);
 					}
 					else
 					{
 						if (monkeys_list[newPresence.userID].game!== "inc")
 						{
-							console.log(new_users_data.username+" a commencé l'activitée : "+activity.name);
+							//console.log(new_users_data.username+" a commencé l'activitée : "+activity.name);
 						}
 					}
 
@@ -86,7 +86,7 @@ module.exports = async(client,oldPresence, newPresence)=>{
 					if( info === null)
 					{
 						result = await monkey.create_m(usr).then()
-						console.log(`création du membre ${usr['username']}`)
+						//console.log(`création du membre ${usr['username']}`)
 					}
 
 

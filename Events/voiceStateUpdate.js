@@ -21,14 +21,14 @@ module.exports = async(client,oldMember, newMember)=>{
 		{
 			if(oldMember.member.nickname !== null && monkeys_list[oldMember.id].salon!=="out")
 			{
-				console.log(oldMember.member.nickname+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
+				//console.log(oldMember.member.nickname+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
 			}
 
 			else
 			{
 				if (monkeys_list[oldMember.id].salon!== "out")
 				{
-					console.log(oldMember.member.user.username+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
+					//console.log(oldMember.member.user.username+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
 				}
 			}
 
@@ -55,7 +55,7 @@ module.exports = async(client,oldMember, newMember)=>{
 				if( info === null)
 				{
 					result = await monkey.create_m(usr).then()
-					console.log(`création du membre ${usr['username']}`)
+					//console.log(`création du membre ${usr['username']}`)
 				}
 
 
@@ -73,12 +73,12 @@ module.exports = async(client,oldMember, newMember)=>{
 				//si le joueur avait définis un pseudo
 				if(newMember.member.nickname !== null)
 				{
-					console.log(newMember.member.nickname+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
+					//console.log(newMember.member.nickname+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
 				}
 
 				else
 				{
-					console.log(newMember.member.user.username+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
+					//console.log(newMember.member.user.username+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
 				}
 				
 

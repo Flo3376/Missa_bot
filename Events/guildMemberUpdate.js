@@ -1,28 +1,27 @@
-//si un event guildMemberAdd arrive (un nouveau membre rejoint le discord)
-
-//chargement de la lib mysql_lite3
-var sqlite3 = require('sqlite3').verbose();
-
-//récupération de l'objet db
-const sqlite = require("./../class/db.js")
-
-//récupération de l'objet monkey
-const monkeys = require("./../class/monkey.js")
-
-module.exports = async(oldMember, newMember)=>{
-
-	//console.log(newMember.members.cache)
-	//console.log(oldMember.members.cache)
-	//on prépare l'objet salon_m
-	//let salon= new salons_m();
-
-	//on recherche un correspondance avec un salon existant
-	//let info = await salon.search_s(newChannel.id).then()
-	//si le salon n'exsite pas on le créé
-	//if( info === null){result = await salon.create_s(newChannel).then();}
-	//sinon on le met à jours de toute façon
-	//else{result = await salon.update_s(newChannel).then();}
-
-	//salon_list[newChannel.id]=salon;
+module.exports = async(client,oldMember, newMember)=>{
+	// Si les rôles sont présents sur l'ancien objet membre mais plus sur le nouveau (c'est-à-dire que les rôles ont été supprimés)
+	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+	if (removedRoles.size > 0)
+	{
+		let role_id= removedRoles.map(r => r.id)[0];
+		if(role_id ==="711134205270032404")
+		{
+			oldMember.send("adieux")
+		}
+		
+	}
+	console.log(`The roles ${removedRoles.map(r => r.id)} were removed from ${oldMember.displayName}.`);
+	
+	// Si le ou les rôles sont présents sur le nouvel objet membre mais ne le sont pas sur l'ancien (c'est-à-dire que les rôles ont été ajoutés)
+	const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+	if (addedRoles.size > 0)
+	{
+		let role_id= addedRoles.map(r => r.id)[0];
+		if(role_id ===config.bm_id_role)
+		{
+			newMember.send("bienvenue")
+		}
+	} 
+	console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 
 };

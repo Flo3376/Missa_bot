@@ -1,4 +1,5 @@
 { 
    "token"   : "token donnée pour app dev de discord" ,
-   "prefix" : "+" 
+   "prefix" : "+" ,
+   "bm_id_role": "711134205270032404"
 }

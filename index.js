@@ -134,5 +134,3 @@ fs.readdir("./Cycle/",(error,f)=>{
 		});
 	console.log("======================")
 })
-
-
