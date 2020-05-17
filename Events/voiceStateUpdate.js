@@ -1,37 +1,26 @@
-var googleTTS = require('google-tts-api');
-
-//chargement de la lib mysql_lite3
-var sqlite3 = require('sqlite3').verbose();
-
-//récupération de l'objet db
-const sqlite = require("./../class/db.js")
-
-//récupération de l'objet monkey
-const monkeys = require("./../class/monkey.js")
-
-
+//lorsque qu'un membre rentre dans salon
 module.exports = async(client,oldMember, newMember)=>{
-
-	let last_channel_id="";
+		let last_channel_id="";
 	//si l'on détecte un mouvement de sortie de salon
 	if(oldMember)
 	{
 		//on vérifie que le channel id exsite, sinon le joueur vient de faire une connection au serveur
 		if(oldMember.channel!==null)
 		{
+			/*
 			if(oldMember.member.nickname !== null && monkeys_list[oldMember.id].salon!=="out")
 			{
-				//console.log(oldMember.member.nickname+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
+				console.log(oldMember.member.nickname+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
 			}
 
 			else
 			{
 				if (monkeys_list[oldMember.id].salon!== "out")
 				{
-					//console.log(oldMember.member.user.username+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
+					console.log(oldMember.member.user.username+" est sortie du  salon : "+salon_list[monkeys_list[oldMember.id].salon].name);
 				}
 			}
-
+			*/
 			//on mémorise d'ou vient de partir le membre
 			last_channel_id=oldMember.channel.id;
 		}
@@ -70,20 +59,21 @@ module.exports = async(client,oldMember, newMember)=>{
 
 				monkeys_list[newMember.id]=monkey;
 
+				/*
 				//si le joueur avait définis un pseudo
 				if(newMember.member.nickname !== null)
 				{
-					//console.log(newMember.member.nickname+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
+					console.log(newMember.member.nickname+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
 				}
 
 				else
 				{
-					//console.log(newMember.member.user.username+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
+					console.log(newMember.member.user.username+" est entré dans le du  salon : "+salon_list[monkeys_list[newMember.id].salon].name)
 				}
-				
+				*/
 
 				//si le membre rentre dans un salon vocal où il doit être accueillit pas une musique
-				if(salon_auto_play.includes(newMember.channel.id))
+				if(config.salon_auto_play.includes(newMember.channel.id))
 				{
 					let voiceChannel = client.channels.cache.get(newMember.channel.id);
 					voiceChannel.join().then(connection => {
@@ -92,8 +82,22 @@ module.exports = async(client,oldMember, newMember)=>{
 					});
 				}
 
+				
+				//si le membre est un jgm
+				let this_member = newMember.guild.members.cache.get(newMember.id)
+				if(this_member._roles.includes(config.jgm_id_role))
+				{
+					let voiceChannel = client.channels.cache.get(newMember.channel.id);
+					voiceChannel.join().then(connection => {
+						const dispatcher = connection.play('./mp3/Cultisime/club_dorothé.mp3', { volume: 0.5 }); 
+						dispatcher.on('finish', () => {voiceChannel.leave()});
+					});
+				}
+
+
+
 				//si le membre rentre dans un salon vocal où il doit être accueillit pas un message vocal de bienvenue
-				if(salon_auto_says.includes(newMember.channel.id))
+				if(config.salon_auto_says.includes(newMember.channel.id))
 				{
 					if(newMember.member.user.username!=="missa")
 					{

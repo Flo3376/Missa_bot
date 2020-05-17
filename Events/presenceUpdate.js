@@ -30,17 +30,17 @@ module.exports = async(client,oldPresence, newPresence)=>{
 					old_users_data=old_users_data.get(oldPresence.userID);
 
 					//si le joueur n'as pas changé son peudo, nickname n'exsite pas, il faut utilisé username					
-					if(oldPresence.member.nickname !== null && monkeys_list[oldPresence.userID].game!=="inc")
+					/*if(oldPresence.member.nickname !== null && monkeys_list[oldPresence.userID].game!=="inc")
 					{
-						//console.log(oldPresence.member.nickname+" a quité l'activitée : "+activity.name);
+						console.log(oldPresence.member.nickname+" a quité l'activitée : "+activity.name);
 					}
 					else
 					{
 						if (monkeys_list[oldPresence.userID].game!== "inc")
 						{
-							//console.log(old_users_data.username+" a quité l'activitée : "+activity.name);
+							console.log(old_users_data.username+" a quité l'activitée : "+activity.name);
 						}
-					}
+					}*/
 
 					last_activity_type="activity.type";
 					last_activity_name="activity.name";
@@ -65,18 +65,19 @@ module.exports = async(client,oldPresence, newPresence)=>{
 					let new_users_data = client.users.cache;
 					new_users_data=new_users_data.get(newPresence.userID);
 
+					/*
 					if(newPresence.member.nickname !== null && monkeys_list[newPresence.userID].game!=="inc")
 					{
-						//console.log(newPresence.member.nickname+" a commencé l'activitée : "+activity.name);
+						console.log(newPresence.member.nickname+" a commencé l'activitée : "+activity.name);
 					}
 					else
 					{
 						if (monkeys_list[newPresence.userID].game!== "inc")
 						{
-							//console.log(new_users_data.username+" a commencé l'activitée : "+activity.name);
+							console.log(new_users_data.username+" a commencé l'activitée : "+activity.name);
 						}
 					}
-
+					*/
 					//on prépare l'objet monkeys
 					let monkey= new monkeys();
 

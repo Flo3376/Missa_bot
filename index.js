@@ -52,15 +52,6 @@ global.sound_list=[];
 //tableau qui contiendra tous les membres
 global.monkeys_list={};
 
-//id du salon ou seront déplacé les joueurs à calmer quelque instant
-global.salon_kill='597787997936549899';
-
-//liste des salons où missa lancera le théme avenger
-global.salon_auto_play=["704788656896081990","704432846755987500"];
-
-//liste des salons où missa souhaitera la bienvenue
-global.salon_auto_says=["705683831247601665","706790312441413663"];
-
 //tableau du createur d'aide
 global.helps=[];
 

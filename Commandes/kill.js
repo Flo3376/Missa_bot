@@ -29,7 +29,7 @@ module.exports.run = async(client,message,args) =>{
 	raison = raison.replace(message.mentions.users.first(), '');
 
 	//on déplace le membre vers le salon afk définis par salon_kill
-	kill.voice.setChannel(salon_kill)
+	kill.voice.setChannel(config.kill_id_salon)
 
 	message.channel.send(`${member.user.username} est kick par ${message.author.username}, pour la raison suivante ${raison}`);
 		 message.mentions.users.first().send(`${member.user.username}, Vous avez été expulsé du serveur **${message.guild.name} par ${message.author.username}, pour la raison suivante '${raison}'`);

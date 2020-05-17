@@ -31,7 +31,22 @@ module.exports = async(client,oldMember, newMember)=>{
 
 			
 		}
+		if(role_id ===config.gm_id_role)
+		{
+			//newMember.send("bienvenue")
+
+			//chargement du template (méthode provisoire car dangereuse avec l'utilisation de la méthode eval())
+			fs.readFile("./embed/to_gm.js", "utf-8", (err, data) => {
+				//interprétation du template
+				eval(data)
+				//envoie du message privée avec la réponse
+				newMember.send(my_embed)
+			});
+
+			
+		}
+		console.log(`Le rôle ${addedRoles.map(r => r.name)} id:'${addedRoles.map(r => r.id)}' a été ajouté à ${oldMember.displayName}.`);
 	} 
-	console.log(`Le rôle ${addedRoles.map(r => r.name)} a été ajouté à ${oldMember.displayName}.`);
+	
 
 };
