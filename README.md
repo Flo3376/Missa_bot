@@ -5,6 +5,7 @@
 ├── bluebird@3.7.2
 ├── canvas@2.6.1
 ├── cheerio@1.0.0-rc.3
+├── cheerio-tableparser@1.0.1
 ├── discord.js@12.2.0
 ├── ffmpeg@0.0.4
 ├── fluent-ffmpeg@2.1.2

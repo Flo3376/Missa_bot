@@ -25,13 +25,26 @@ module.exports = async(client,message)=>{
   		//si le message ne commance pas par +
   		if(!message.content.startsWith(prefix)) return;
 
-  		const args = message.content.slice (prefix.length).trim().split(/ +/g);
+  		const args = message.content.toLowerCase().slice (prefix.length).trim().split(/ +/g);
   		const commande = args.shift();
 
   		const cmd = client.commands.get(commande);
 
   		console.log(`L'utilisateur ${monkeys_list[message.author.id].name} à fait appel à la commande : ${commande} , arguments ${args} à ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
 
+  		if(auto_reload===true)
+  		{
+  			if(!client.commands.has(commande)) {
+  				return message.reply(`La commande '${commande}' ne semble pas exister`);
+  			}
+  			// the path is relative to the *current folder*, so just ./filename.js
+  			delete require.cache[require.resolve(`./../Commandes/${commande}.js`)];
+ 			// We also need to delete and reload the command from the client.commands Enmap
+ 			client.commands.delete(commande);
+ 			const props = require(`./../Commandes/${commande}.js`);
+ 			client.commands.set(commande, props);
+ 			message.reply(`La commande ${commande} a été récharger avec sa mise à jour`);
+ 		}
 
 		//si la commande n'existe pas
 		if(!cmd) return message.channel.send("Et encore un qui n'est pas capable de saisir une commande valide, ça me fatigue!, Tapes +help pour avoir les commandes actives");;

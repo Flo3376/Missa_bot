@@ -1,19 +1,13 @@
-module.exports.run = async (client, message, args) => {
-
-	//on charge la methode request pour faire une demande post
-	const request = require('request')
-
-	//affichage de l'utilisateur à vérifier
-	console.log(args)
+module.exports.run = async (client,message,args) =>{
+//on charge la methode request pour faire une demande post
+const request = require('request')
 
 	//chargement du parseur de page HTML
-	const cheerio = require('cheerio');
+	const cheerio = require('cheerio'),cheerioTableparser = require('cheerio-tableparser');
 
 	//construction du lien à parser
-	const url = 'https://robertsspaceindustries.com/citizens/'+ args[0];
-
-	console.log(url)
-
+	//const url = 'https://starcitizen.tools/List_of_Ship_and_Vehicle_Prices';
+	const url = 'https://starcitizen.tools/Ships';
 	const fs = require('fs');
 
 	//requete HTTP
@@ -25,7 +19,55 @@ module.exports.run = async (client, message, args) => {
 				return
 			}
 
-			const $ = cheerio.load(data);
+			//chargement des données de la page appelée pour le parsage
+			var $ = cheerio.load(data);
+
+			let table_find = [];
+			let table_data = [];
+
+			//rechcerche du tableau à inspecter (il n'y en a qu'un seul)
+			$("table").each(function (i, table) {
+				console.log(`tableau : ${i}`)
+				//mise en mémoire du tableau
+				table_find.push(table)
+			});
+			//console.log(table_find[0])
+
+			//chargement du tableau récupérer pour le parsage
+			$ = cheerio.load(table_find[0])
+
+			//parsage du tableau en mod code (en gros ce qui est visible en faisant F12, a ref, class, id ....)
+			cheerioTableparser($);
+			var data_link = $("table").parsetable();
+
+			//parsage du tableau en mod text (ce que vera un utilsateur sur son écran)
+			cheerioTableparser($);
+			var datas_text = $("table").parsetable(true, true, true);
+
+
+
+			for (var i = 0; i < datas_text[1].length; i++)
+			{
+				let ship=[];
+				console.log(datas_text[1][i]);
+				/*$ = cheerio.load(data_link[1][i]);
+
+				$("a").each(function (i, link){
+					console.log(link)
+
+				});*/
+
+
+				ship["name"]=datas_text[1][i];
+				let link=datas_text[1][i]
+				link="https://starcitizen.tools/"+link.replace(" ","_");
+				ship["link"]=link;
+				table_data.push(ship);
+			}
+
+			console.log(table_data)
+
+			/*
 
 			//création des divers tableaux où seront stockés les images lien et info
 			let output = [];
@@ -95,13 +137,13 @@ module.exports.run = async (client, message, args) => {
 						message.reply(my_embed)
 					});
 				}
-			}
+			}*/
 		})
-};
+}
 
-module.exports.help = {
-	name: "ask",
-	info: `+ask [Nom du joueur]\nPermet d'accéder au dossier spectrum d'un membre, exemple: +ask gm_bob`,
-	admin: true,
-	channel: "dm"
+module.exports.help ={
+	name: "ship",
+	info: ``,
+	admin: false,
+	channel: "both",
 };

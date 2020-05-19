@@ -19,7 +19,6 @@ global.serverQueue ;
 //lancement la lib google traduction
 global.googleTTS = require('google-tts-api');
 
-
 //récupération de la configuration
 global.config  =  require ( "./config.json" ) ;
 
@@ -42,6 +41,9 @@ client.login(config.token)
 
 //variable permettant ou pas à missa de rester dans un salon à la fin d'une lecture
 global.standby=false;
+
+//variable permettant ou pas de purger le cache des commandes apellées
+global.auto_reload=false;
 
 //tableau qui contiendra tous les salons
 global.salon_list={};
