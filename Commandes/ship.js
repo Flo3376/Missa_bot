@@ -1,13 +1,30 @@
 module.exports.run = async (client,message,args) =>{
-//on charge la methode request pour faire une demande post
-const request = require('request')
+	//on charge la methode request pour faire une demande post
+	const request = require('request')
+
+	function dynamicSort(property) {
+		var sortOrder = 1;
+
+		if(property[0] === "-") {
+			sortOrder = -1;
+			property = property.substr(1);
+		}
+
+		return function (a,b) {
+			if(sortOrder == -1){
+				return b[property].localeCompare(a[property]);
+			}else{
+				return a[property].localeCompare(b[property]);
+			}        
+		}
+	}
 
 	//chargement du parseur de page HTML
 	const cheerio = require('cheerio'),cheerioTableparser = require('cheerio-tableparser');
 
 	//construction du lien à parser
 	//const url = 'https://starcitizen.tools/List_of_Ship_and_Vehicle_Prices';
-	const url = 'https://starcitizen.tools/Ships';
+	const url = 'https://starcitizen.tools/List_of_Ship_and_Vehicle_Prices';
 	const fs = require('fs');
 
 	//requete HTTP
@@ -23,7 +40,7 @@ const request = require('request')
 			var $ = cheerio.load(data);
 
 			let table_find = [];
-			let table_data = [];
+			let table_data = {};
 
 			//rechcerche du tableau à inspecter (il n'y en a qu'un seul)
 			$("table").each(function (i, table) {
@@ -45,27 +62,38 @@ const request = require('request')
 			var datas_text = $("table").parsetable(true, true, true);
 
 
-
-			for (var i = 0; i < datas_text[1].length; i++)
+			//on parcours le tableau HTML pour le convertir en tableau nodejs (lecture en colone)
+			for (var i = 1; i < datas_text[1].length; i++)
 			{
 				let ship=[];
-				console.log(datas_text[1][i]);
-				/*$ = cheerio.load(data_link[1][i]);
-
-				$("a").each(function (i, link){
-					console.log(link)
-
-				});*/
-
-
-				ship["name"]=datas_text[1][i];
-				let link=datas_text[1][i]
+				ship["name"]=datas_text[0][i];
+				let link=datas_text[0][i]
 				link="https://starcitizen.tools/"+link.replace(" ","_");
 				ship["link"]=link;
-				table_data.push(ship);
+
+				if(!(datas_text[1][i] in table_data))
+				{
+					table_data[datas_text[1][i]]={};
+				}
+
+				table_data[datas_text[1][i]].push(ship)
 			}
 
-			console.log(table_data)
+			//trie par ordre alphabétique des constructeurs
+			let table_data_ordered = {};
+			Object.keys(table_data).sort().forEach(function(key) {
+				table_data_ordered[key] = table_data[key];
+			});
+
+			//on parcours le tableau 
+			for (var i = 1; i < table_data_ordered.length; i++)
+			{
+				table_data_ordered[i].sort(dynamicSort("name"));
+			}
+			//table_data.sort(dynamicSort("name"));
+			//table_data=table_data.sort();
+
+			console.log(table_data_ordered)
 
 			/*
 

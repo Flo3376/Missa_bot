@@ -1,0 +1,179 @@
+module.exports.run = async (client,message,args) =>{
+
+	var manu=[
+	{"man":"Aegis Dynamics", "links":"https://starcitizen.tools/Aegis_Dynamics","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Aegis_Dynamics.png"},
+	{"man":"Anvil Aerospace", "links":"https://starcitizen.tools/Anvil_Aerospace","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Anvil_Aerospace.png"},
+	{"man":"AopoA", "links":"https://starcitizen.tools/AopoA","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/AopoA.png"},
+	{"man":"ARGO Astronautics", "links":"https://starcitizen.tools/ARGO_Astronautics","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/ARGO_Astronautics.png"},
+	{"man":"Banu Souli", "links":"https://starcitizen.tools/Banu_Souli","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Banu_Souli.png"},
+	{"man":"Consolidate dOutland", "links":"https://starcitizen.tools/Consolidated_Outland","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Consolidated_Outland.png"},
+	{"man":"Crusader Industries", "links":"https://starcitizen.tools/Crusader_Industries","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Crusader_Industries.png"},
+	{"man":"Drake Interplanetary", "links":"https://starcitizen.tools/Drake_Interplanetary","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Drake_Interplanetary.png"},
+	{"man":"Esperia Inc.", "links":"https://starcitizen.tools/Esperia_Inc.","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Esperia_Inc..png"},
+	{"man":"Greycat Industrial", "links":"https://starcitizen.tools/Greycat_Industrial","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Greycat_Industrial.png"},
+	{"man":"Kruger Intergalactic", "links":"https://starcitizen.tools/Kruger_Intergalactic","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Kruger_Intergalactic.png"},
+	{"man":"Musashi Industrial and Starflight Concern", "links":"https://starcitizen.tools/Musashi_Industrial_and_Starflight_Concern","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Musashi_Industrial_and_Starflight_Concern.png"},
+	{"man":"Roberts Space Industries", "links":"https://starcitizen.tools/Roberts_Space_Industries_(manufacturer)","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Roberts_Space_Industries.png"},
+	{"man":"Tumbril Land Systems", "links":"https://starcitizen.tools/Tumbril_Land_Systems","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Tumbril_Land_Systems.png"},
+	{"man":"Tumbril Land Systems", "links":"https://starcitizen.tools/Tumbril_Land_Systems","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Tumbril_Land_Systems.png"},
+
+
+
+
+
+
+
+
+
+
+	]
+	
+	//on charge la methode request pour faire une demande post
+	const request = require('request')
+
+	function dynamicSort(property) {
+		var sortOrder = 1;
+
+		if(property[0] === "-") {
+			sortOrder = -1;
+			property = property.substr(1);
+		}
+
+		return function (a,b) {
+			if(sortOrder == -1){
+				return b[property].localeCompare(a[property]);
+			}else{
+				return a[property].localeCompare(b[property]);
+			}        
+		}
+	}
+
+	//chargement du parseur de page HTML
+	const cheerio = require('cheerio'),cheerioTableparser = require('cheerio-tableparser');
+
+	//construction du lien à parser
+	//const url = 'https://starcitizen.tools/List_of_Ship_and_Vehicle_Prices';
+	const url = 'https://starcitizen.tools/Ship_Manufacturers';
+	const fs = require('fs');
+
+	//requete HTTP
+	request.post(
+		url,
+		(error, res, data) => {
+			if (error) {
+				console.error(error)
+				return
+			}
+
+			//chargement des données de la page appelée pour le parsage
+			var $ = cheerio.load(data);
+
+			let table_find = [];
+			let table_data = [];
+
+			//rechcerche du tableau à inspecter (il n'y en a qu'un seul)
+			$("table").each(function (i, table) {
+				//console.log(`tableau : ${i}`)
+				//mise en mémoire du tableau
+				table_find.push(table)
+			});
+			//console.log(table_find[0])
+
+			//chargement du tableau récupérer pour le parsage
+			$ = cheerio.load(table_find[0])
+
+			//parsage du tableau en mod code (en gros ce qui est visible en faisant F12, a ref, class, id ....)
+			cheerioTableparser($);
+			var data_link = $("table").parsetable();
+
+			//parsage du tableau en mod text (ce que vera un utilsateur sur son écran)
+			cheerioTableparser($);
+			var datas_text = $("table").parsetable(true, true, true);
+
+			
+
+
+			//on parcours le tableau HTML pour le convertir en tableau nodejs (lecture en colone)
+			for (var i = 1; i < datas_text[1].length; i++)
+			{
+				//récupération du logo
+				$ = cheerio.load(data_link[0][i]);
+				let logo="";
+				let fields=[];
+				let description="";
+				/*$("img").each(function (i, image) {
+					logo=$(image).attr('src')
+					logo=logo.replace('*.svg','')
+				});*/
+
+				//récupération des liens constructeurs
+				$ = cheerio.load(data_link[1][i]);
+				$("a").each(function (i, link) {
+					man_links="https://starcitizen.tools"+$(link).attr('href')
+				});
+
+				//récupération des liens appareils par constructeur
+				$ = cheerio.load(data_link[2][i]);
+				let ship_links=[]
+				$("a").each(function (i, link) {
+					//ship_links.push("https://starcitizen.tools"+$(link).attr('href'))
+					
+					//extraction du nom du lien à partir de l'url
+					let name_link=($(link).attr('href')).replace('/','')
+					name_link=name_link.replace('/','')
+					name_link=name_link.replace('_',' ')
+					
+					//création du lien format discord
+					let one_links="["+name_link+"](https://starcitizen.tools"+$(link).attr('href')+")"
+					let one_field=[]
+					logo =$(link).attr('href')
+					//création du field
+					one_field["name"]="\u200b"
+					one_field["inline"]=true
+					one_field["value"]=one_links
+
+					description=description+"["+name_link+",](https://starcitizen.tools"+$(link).attr('href')+")      "
+
+
+					//envoie du field dans la liste des fields
+					fields.push(one_field)
+				});
+
+				//console.log(fields)
+
+				let man=[];
+				man['img']=datas_text[1][i].replace(/ /g, '_');
+				//man['img']=man['img'].replace(" ","_");
+				man['name']=datas_text[1][i];
+				man['description']=description;
+				//man['logo']=logo;
+				man['logo']=logo
+				man['man_links']=man_links;
+				man['ship_links']=ship_links;
+				console.log(man['img'])
+
+
+
+				//console.log(man)
+
+				//table_data.push(man)
+				//chargement du template (méthode provisoire car dangereuse avec l'utilisation de la méthode eval())
+				fs.readFile("./embed/man.js", "utf-8", (err, data) => {
+					//interprétation du template
+					eval(data)
+
+					console.log(my_embed)
+					//envoie du message privée avec la réponse
+					//message.reply(my_embed,)
+				});
+			}
+			console.log(manu)
+		})
+}
+
+module.exports.help ={
+	name: "man",
+	info: ``,
+	admin: false,
+	channel: "both",
+};

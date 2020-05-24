@@ -57,7 +57,28 @@ global.monkeys_list={};
 //tableau du createur d'aide
 global.helps=[];
 
+//tableau de tous les vaisseaux
+global.all_ships=[];
 
+//construction du tableau des constructeurs
+global.man=[
+{"id":"0","name":"Aegis Dynamics","ships":[], "links":"https://starcitizen.tools/Aegis_Dynamics","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Aegis_Dynamics.png"},
+{"id":"1","name":"Anvil Aerospace","ships":[], "links":"https://starcitizen.tools/Anvil_Aerospace","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Anvil_Aerospace.png"},
+{"id":"2","name":"Aopoa","ships":[], "links":"https://starcitizen.tools/AopoA","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/AopoA.png"},
+{"id":"3","name":"Argo Astronautics","ships":[], "links":"https://starcitizen.tools/ARGO_Astronautics","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/ARGO_Astronautics.png"},
+{"id":"4","name":"Banu Souli","ships":[], "links":"https://starcitizen.tools/Banu_Souli","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Banu_Souli.png"},
+{"id":"5","name":"Consolidated Outland","ships":[], "links":"https://starcitizen.tools/Consolidated_Outland","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Consolidated_Outland.png"},
+{"id":"6","name":"Crusader Industries","ships":[], "links":"https://starcitizen.tools/Crusader_Industries","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Crusader_Industries.png"},
+{"id":"7","name":"Drake Interplanetary","ships":[], "links":"https://starcitizen.tools/Drake_Interplanetary","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Drake_Interplanetary.png"},
+{"id":"8","name":"Esperia","ships":[], "links":"https://starcitizen.tools/Esperia_Inc.","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Esperia_Inc..png"},
+{"id":"9","name":"Greycat Industrial","ships":[], "links":"https://starcitizen.tools/Greycat_Industrial","img" : "https://starcitizen.tools/images/thumb/1/15/Greycat.jpg/450px-Greycat.jpg"},
+{"id":"10","name":"Kruger Intergalactic","ships":[], "links":"https://starcitizen.tools/Kruger_Intergalactic","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Kruger_Intergalactic.png"},
+{"id":"11","name":"Musashi Industrial and Starflight Concern","ships":[], "links":"https://starcitizen.tools/Musashi_Industrial_and_Starflight_Concern","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Musashi_Industrial_and_Starflight_Concern.png"},
+{"id":"12","name":"Origin Jumpworks","ships":[], "links":"https://starcitizen.tools/Origin_Jumpworks_GmbH","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Origin.png"},
+{"id":"13","name":"Roberts Space Industries","ships":[], "links":"https://starcitizen.tools/Roberts_Space_Industries","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Roberts_Space_Industries.png"},
+{"id":"14","name":"Tumbril Land Systems","ships":[], "links":"https://starcitizen.tools/Tumbril_Land_Systems","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Tumbril_logo.png"},
+{"id":"15","name":"Vanduul Clans","ships":[], "links":"https://starcitizen.tools/Vanduul_Clans","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Vanduul.png"},
+]
 
 client.commands = new Discord.Collection();
 //chargement des fichiers commandes js
