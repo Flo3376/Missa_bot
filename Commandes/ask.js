@@ -1,4 +1,5 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
+	const args = message.content.split(" ");
 
 	//chargement des paramêtres de cette commande
 	const param = client.commands.get('ask').help
@@ -20,7 +21,7 @@ module.exports.run = async (client, message, args) => {
 		const cheerio = require('cheerio');
 
 		//construction du lien à parser
-		const url = 'https://robertsspaceindustries.com/citizens/'+ args[0];
+		const url = 'https://robertsspaceindustries.com/citizens/'+ args[1];
 
 		console.log(url)
 
@@ -74,7 +75,7 @@ module.exports.run = async (client, message, args) => {
 				//si aucune images n'est détectées, c'est que la page n'a pas trouvé de correspondance, mais elle à répondu correctement
 				if (images.length === 0) {
 					//renvoie d'un message de non correspondance
-					message.channel.send(`Aucunes correspondances trouvées pour ${args[0]}`)
+					message.channel.send(`Aucunes correspondances trouvées pour ${args[1]}`)
 
 				}
 				else {

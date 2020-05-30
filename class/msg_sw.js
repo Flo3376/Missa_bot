@@ -77,7 +77,7 @@ module.exports= class msg_sw {
 				message.author.send(`Cette commande ne peut pas être utilisée dans un salon texte.`)
 			}
 			else{
-				message.author.send(`Je ne sais pas où je dois vous répondre.\n Les consignes de mon concepteur sont flous.\n "bah ici connasse" n'est pas une réponse que je peux interpréter"`)
+				message.author.send(`Je ne sais pas où je dois vous lire.\n Les consignes de mon concepteur sont flous.\n "bah ici connasse" n'est pas une réponse que je peux interpréter`)
 			}
 		}
 	}
@@ -104,7 +104,7 @@ module.exports= class msg_sw {
 			}
 			else
 			{
-				message.author.send(`Je ne sais pas où je dois vous répondre.\n Les consignes de mon concepteur sont flous.\n "bah ici connasse" n'est pas une réponse que je peux interpréter"`)
+				message.author.send(`Je ne sais pas où je dois vous répondre.\n Les consignes de mon concepteur sont flous.\n "bah ici connasse" n'est pas une réponse que je peux interpréter`)
 			}
 		}
 		else if(force_output==="forced")

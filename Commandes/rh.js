@@ -1,20 +1,37 @@
-module.exports.run = async (client,message,args) =>{
-	const membre= message.mentions.members.first() || message.member;
+module.exports.run = async (client,message) =>{
+	const args = message.content.split(" ");
+	//chargement des paramêtres de cette commande
+	const param = client.commands.get('rh').help
+
+	/*
+	*	initialisation d'un routeur entrant/sortant
+	*
+	*	@param: paramétre des droits entrants et sortant du message indiqués dans le help de la commande
+	*/
+	var switch_msg=new msg_sw(param,client,message)
+	//envoie des données concernant le message entrant
+	switch_msg.init(client,message)
+	//console.log(switch_msg)
+
+	//si dans le processus de vérification des entrés tout est ok, on peux envoyer la réponse
+	if(switch_msg.error.length==0)
+	{
+		const membre= message.mentions.members.first() || message.member;
 		console.log(message.content)
 
 		const voiceChannel = message.member.voice.channel;
 		if (!voiceChannel)
-			return message.channel.send(
-				"Vous devez être dans un salon vocal pour pouvoir joueur de la musique!"
-				);
+		{
+			return message.author.send("Vous devez être dans un salon vocal pour pouvoir joueur de la musique!");
+
+		}
 		const permissions = voiceChannel.permissionsFor(message.client.user);
-		if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-			return message.channel.send(
-				"Je n'ai pas le droit de diffuser de la musique dans ce salon"
-				);
+		if (!permissions.has("CONNECT") || !permissions.has("SPEAK"))
+		{
+			return message.author.send("Je n'ai pas le droit de diffuser de la musique dans ce salon");
 		}
 
-		if(isNaN(args[0]))
+		if(isNaN(args[1]))
 		{
 			return message.author.send("Vous n'avez spécifiez un nombre réelle");
 		}
@@ -31,7 +48,6 @@ module.exports.run = async (client,message,args) =>{
 			if( info === null)
 			{
 				result = await monkey.create_m(message.author).then()
-				console.log(`création du membre ${message.author['username']}`)
 			}
 			//creation du tableau de mise à jour
 			let new_data={};
@@ -46,7 +62,7 @@ module.exports.run = async (client,message,args) =>{
 
 			voiceChannel.join()
 			.then(connection => {
-				const dispatcher = connection.play(sound_list[args], { volume: 0.5 }); 
+				const dispatcher = connection.play(sound_list[args[1]], { volume: 0.5 }); 
 				dispatcher.on('finish', () => {
 					if(standby===false)
 					{
@@ -55,13 +71,23 @@ module.exports.run = async (client,message,args) =>{
 				});
 			})
 			.catch(console.error);
-			;
+			
 		}
 		else
 		{
-			return message.author.send("Vous avez épuisez vos 5 jetons pour déconner. Les jetons se régénérent toute les minutes, 1 par minutes.");
+			return switch_msg.response(client,message,"Vous avez épuisez vos 5 jetons pour déconner. Les jetons se régénérent toute les minutes, 1 par minutes.")
 		}
+		
+	}
+	else
+	{
+		console.log(`Nombre d'erreur : ${switch_msg.error.length}`)
+		console.log(`Erreur(s) : ${switch_msg.error}`)
+		return
+	}
+
 	
+
 
 
 };
@@ -70,5 +96,7 @@ module.exports.help ={
 	name: "rh",
 	info: `+rh [numéro du préset]\nJouera un extrait de film. La liste des extraits est disponible en faisant +sound_list bruitage.., ex: +rh 5`,
 	admin: false,
-	channel: "in_serv",
+	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
+	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé
+
 };

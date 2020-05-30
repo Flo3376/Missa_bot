@@ -19,9 +19,9 @@ module.exports.run = async (client,message,args) =>{
 	}
 	else
 	{
-		return
 		console.log(`Nombre d'erreur : ${switch_msg.error.length}`)
 		console.log(`Erreur(s) : ${switch_msg.error}`)
+		return
 	}
 
 };

@@ -7,7 +7,5 @@ module.exports.run = async(client,message,args) =>{
 };
 
 module.exports.help ={
-	name: "ping",
-	info: `+ping\nTest son ping (pas sur de la justesse du résultat)`,
-	admin: false,
+	name: "ping"
 };

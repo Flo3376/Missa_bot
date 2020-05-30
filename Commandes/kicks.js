@@ -1,7 +1,7 @@
 //si la commande kick arrive
-module.exports.run = async(client,message,args) =>{
+module.exports.run = async(client,message) =>{
 	//chargement des paramêtres de cette commande
-	const param = client.commands.get('test').help
+	const param = client.commands.get('kick').help
 
 	/*
 	*	initialisation d'un routeur entrant/sortant

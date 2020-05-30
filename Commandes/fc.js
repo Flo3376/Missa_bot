@@ -1,4 +1,6 @@
-module.exports.run = async (client,message,args) =>{
+module.exports.run = async (client,message) =>{
+	const args = message.content.split(" ");
+	
 	//chargement des paramêtres de cette commande
 	const param = client.commands.get('fc').help
 
@@ -16,24 +18,24 @@ module.exports.run = async (client,message,args) =>{
 	if(switch_msg.error.length==0)
 	{
 		//si l'argument vaisseau n'est pas définis
-		if(!args[0])
+		if(!args[1])
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez l'id du vaisseaux")
 		}
 
 		//si l'argument vaisseau n'est pas un chiffre
-		if(isNaN(args[0]))
+		if(isNaN(args[1]))
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez un nombre réelle pour l'id du vaisseaux")
 		}
 
 		//si l'argument argent n'est pas définis
-		if(!args[1])
+		if(!args[2])
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez l'argent disponible")
 		}
 		//si l'argument argent n'est pas un chiffre
-		if(isNaN(args[1]))
+		if(isNaN(args[2]))
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez un nombre réelle pour l'argent disponible")
 		}
@@ -43,9 +45,9 @@ module.exports.run = async (client,message,args) =>{
 		let text=[];
 		let mes_test=0;
 		console.log(args)
-		console.log('https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_fc.php?ship='+args[0]+'&balance='+args[1])
+		console.log('https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_fc.php?ship='+args[1]+'&balance='+args[2])
 		request.post(
-			'https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_fc.php?ship='+args[0]+'&balance='+args[1],
+			'https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_fc.php?ship='+args[1]+'&balance='+args[2],
 			(error, res, data) => {
 				if (error) {
 					console.error(error)

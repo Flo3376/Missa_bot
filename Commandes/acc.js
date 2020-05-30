@@ -1,4 +1,4 @@
-module.exports.run = async (client,message,args) =>{
+module.exports.run = async (client,message) =>{
 	//chargement des paramêtres de cette commande
 	const param = client.commands.get('acc').help
 

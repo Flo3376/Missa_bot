@@ -1,5 +1,6 @@
 //si la commande clear est appelé
-module.exports.run = async(client,message,args) =>{
+module.exports.run = async(client,message) =>{
+	const args = message.content.split(" ");
 	//chargement des paramêtres de cette commande
 	const param = client.commands.get('clear').help
 
@@ -23,23 +24,23 @@ module.exports.run = async(client,message,args) =>{
 		}
 
 		//si l'argument n'est pas donnée
-		if(!args[0])
+		if(!args[1])
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez le nombre de messages à supprimer")
 		}
 
 		//si l'argument n'est pas un chiffre
-		if(isNaN(args[0]))
+		if(isNaN(args[1]))
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez un nombre réelle")
 		}
 		//si l'argument n'est pas un chiffre
-		if(args[0]>100)
+		if(args[1]>100)
 		{
-			args[0]=100;
+			args[1]=100;
 		}
 		//destruction de x message
-		message.channel.bulkDelete(args[0])
+		message.channel.bulkDelete(args[1])
 		
 	}
 	else
