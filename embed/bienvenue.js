@@ -23,7 +23,7 @@ var my_embed={
       "inline": true
   },
   {
-      "name": "🙄",
+      "name": "\u200b",
       "value": "Sur les reseaux sociaux",
       
   },

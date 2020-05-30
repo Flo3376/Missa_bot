@@ -1,7 +1,52 @@
-const Discord = require ("discord.js");
-//si la commande help arrive
 module.exports.run = async (client,message, args) =>{
-	message.author.send({
+	//chargement des paramêtres de cette commande
+	const param = client.commands.get('help').help
+
+	/*
+	*	initialisation d'un routeur entrant/sortant
+	*
+	*	@param: paramétre des droits entrants et sortant du message indiqués dans le help de la commande
+	*/
+	var switch_msg=new msg_sw(param,client,message)
+	//envoie des données concernant le message entrant
+	switch_msg.init(client,message)
+	//console.log(switch_msg)
+
+	//si dans le processus de vérification des entrés tout est ok, on peux envoyer la réponse
+	if(switch_msg.error.length==0)
+	{
+		let fields=[];
+		for (var i = 0; i < helps.length; i++)
+		{
+			let one_field=[]
+			one_field["name"]=helps[i]["name"]
+			one_field["inline"]=false
+			one_field["value"]=helps[i]["info"]
+			fields.push(one_field)
+		}
+
+		var my_embed={
+			"embed": {
+				"title": "Aide sur les commandes actives",
+				"color": 15179008,
+				"thumbnail": {
+					"url": "https://www.icone-png.com/png/54/53908.png"
+				}, 
+				"fields": [
+				fields
+				]
+
+			} 
+		}
+		switch_msg.response(client,message,my_embed)
+	}
+	else
+	{
+		console.log(`Nombre d'erreur : ${switch_msg.error.length}`)
+		console.log(`Erreur(s) : ${switch_msg.error}`)
+		return
+	}
+	/*message.author.send({
 		embed:{
 			color: 3447003,
 			title:`**Commandes fonctionnelles**`,
@@ -82,10 +127,14 @@ module.exports.run = async (client,message, args) =>{
 				text:`informations demandé par  l'utilisateur ${message.author.username}`
 			}
 		}
-	})
+	})*/
 
 };
 
 module.exports.help ={
-	name: "help"
+	name: "help",//nom de la commande
+	info: `+ Help, Vous retourne toute les commandes activent de se Bot`,//texte descriptif de la commande
+	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
+	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
+	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé
 };

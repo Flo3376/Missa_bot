@@ -171,7 +171,7 @@ module.exports.run = async (client,message,args) =>{
 
 module.exports.help ={
 	name: "ship",
-	info: ``,
+	info: `+ship\n Retourne la liste des appareils et leur index pour la commande +FC`,
 	admin: false,
 	channel: "both",
 };

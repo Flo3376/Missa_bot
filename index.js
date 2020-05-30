@@ -4,6 +4,9 @@ global.Discord = require('discord.js')
 //connexion à discord central et répercution sur les serveurs autorisé
 global.client = new Discord.Client()
 
+//on charge la methode request pour faire une demande post
+global.request = require('request')
+
 //état de l'initialisation du bot
 var ready=false;
 
@@ -33,6 +36,9 @@ global.monkeys = require("./class/monkey.js")
 
 //récupération de l'objet monkey
 global.salons_m = require("./class/salon.js")
+
+//récupération de l'objet message
+global.msg_sw = require("./class/msg_sw.js")
 
 
 

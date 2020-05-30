@@ -3,6 +3,30 @@ const prefix= config.prefix;
 //si un event client.message arrive
 module.exports = async(client,message)=>{
 
+	function getDateTime() {
+
+		var date = new Date();
+
+		var hour = date.getHours();
+		hour = (hour < 10 ? "0" : "") + hour;
+
+		var min  = date.getMinutes();
+		min = (min < 10 ? "0" : "") + min;
+
+		var sec  = date.getSeconds();
+		sec = (sec < 10 ? "0" : "") + sec;
+
+		var year = date.getFullYear();
+
+		var month = date.getMonth() + 1;
+		month = (month < 10 ? "0" : "") + month;
+
+		var day  = date.getDate();
+		day = (day < 10 ? "0" : "") + day;
+
+		return day + "/" + month + "/" + year  + " à " + hour + ":" + min + ":" + sec;
+	}
+
 	//refus des commandes venant d'un autre bot
 	if(message.author.bot) return;
 
@@ -18,25 +42,39 @@ module.exports = async(client,message)=>{
 		//recherche des rôles que le joueur posséde
 		var this_member = message.guild.members.cache.get(message.author.id);
 	}
+
+	//si le message ne commance pas par +
+	if(!message.content.startsWith(prefix)) return;
+
+	let log=getDateTime() +" : "+message.author.id+" => "+ message.channel.type+"_____"+message.content;
+
+
+	let rawdata = fs.readFileSync('./db/log.txt');
+	if(rawdata.length>0)
+	{
+		log = log+"\n"+rawdata;
+	}
+	
+
+	fs.writeFileSync('./db/log.txt', log);
 	
 	//si la personne qui solicite le bot est BM GM JBM
 	if(this_member._roles.includes(config.bm_id_role) || this_member._roles.includes(config.gm_id_role) || this_member._roles.includes(config.jgm_id_role))
 	{
-  		//si le message ne commance pas par +
-  		if(!message.content.startsWith(prefix)) return;
 
-  		const args = message.content.toLowerCase().slice (prefix.length).trim().split(/ +/g);
-  		const commande = args.shift();
 
-  		const cmd = client.commands.get(commande);
+		const args = message.content.toLowerCase().slice (prefix.length).trim().split(/ +/g);
+		const commande = args.shift();
 
-  		console.log(`L'utilisateur ${monkeys_list[message.author.id].name} à fait appel à la commande : ${commande} , arguments ${args} à ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
+		const cmd = client.commands.get(commande);
 
-  		if(auto_reload===true)
-  		{
-  			if(!client.commands.has(commande)) {
-  				return message.reply(`La commande '${commande}' ne semble pas exister`);
-  			}
+		console.log(`L'utilisateur ${monkeys_list[message.author.id].name} à fait appel à la commande : ${commande} , arguments ${args} à ${getDateTime()}`)
+
+		if(auto_reload===true)
+		{
+			if(!client.commands.has(commande)) {
+				return message.reply(`La commande '${commande}' ne semble pas exister`);
+			}
   			// the path is relative to the *current folder*, so just ./filename.js
   			delete require.cache[require.resolve(`./../Commandes/${commande}.js`)];
  			// We also need to delete and reload the command from the client.commands Enmap
@@ -56,14 +94,16 @@ module.exports = async(client,message)=>{
  		{
 			//si la commande n'existe pas
 			if(!cmd) return message.channel.send("Et encore un qui n'est pas capable de saisir une commande valide, ça me fatigue!, Tapes +help pour avoir les commandes actives");;
+			cmd.run(client,message,args);
+			/*
 
 			//si la commande doit être exécuter uniquement dans un chat du serveur et que ce n'est pas le cas
-			if(cmd.help.channel ==="in_serv" && message.channel.type ==="dm" )
+			if(cmd.help.channel ==="text" && message.channel.type ==="dm" )
 			{
-				message.author.send("Cette commande ne peut pas être utilisée en message privé");
+				message.author.send("Cette commande ne peut pas être utilisée en message privé (last1)");
 			}
 			//si la commande doit être exécuter uniquement dans un chat du serveur et que c'est le cas
-			else if(cmd.help.channel ==="in_serv" && message.channel.type !=="dm" )
+			else if(cmd.help.channel ==="text" && message.channel.type !=="dm" )
 			{
 				//si la commande concerne la lecture de fichier
 				if(commande==='play' || commande==='skip' || commande==='stop')
@@ -88,15 +128,10 @@ module.exports = async(client,message)=>{
 			}
 			else
 			{
-				message.author.send("Cette commande ne peut pas être utilisée en message privé");
+				message.author.send("Cette commande ne peut pas être utilisée en message privé (last2)");
 			}
 
-			//si la commande ne vient pas d'un message privée ou peut le supprimer 
-			//(si cette sécurité n'est pas là, celà provoque des warnings à la console)
-			if(message.channel.type !=="dm" )
-			{
-				message.delete();
-			}
+			*/
 		}
 
 
