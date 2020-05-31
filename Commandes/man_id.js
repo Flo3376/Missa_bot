@@ -17,13 +17,13 @@ module.exports.run = async (client,message) =>{
 	if(switch_msg.error.length==0)
 	{
 		//si l'argument n'est pas donnée
-		if(!args[0])
-		{
+		if(!args[1])
+		{	console.log(args)
 			return switch_msg.response(client,message,"Vous n'avez spécifiez l'id d'un constructeur")
 		}
 
 		//si l'argument n'est pas un chiffre
-		if(isNaN(args[0]))
+		if(isNaN(args[1]))
 		{
 			return switch_msg.response(client,message,"Vous n'avez spécifiez un nombre réelle")
 		}
@@ -35,7 +35,7 @@ module.exports.run = async (client,message) =>{
 		all_ships=[]
 
 		//on charge la methode request pour faire une demande post
-		const request = require('request')
+		//const request = require('request')
 
 		//chargement du parseur de page HTML
 		const cheerio = require('cheerio'),cheerioTableparser = require('cheerio-tableparser');
@@ -101,6 +101,7 @@ module.exports.run = async (client,message) =>{
 						ship['id']=id_ships;
 						ship['name']=$(link).attr('title');
 						ship['link']=$(link).attr('href');
+						ship['logo']=man[actual_man.id].img;
 						all_ships.push(ship);
 
 						man[actual_man.id].ships.push(ship);
@@ -109,13 +110,13 @@ module.exports.run = async (client,message) =>{
 				}
 
 				let fields=[];
-				for (var i2 = 0; i2 < man[args[0]].ships.length; i2++)
+				for (var i2 = 0; i2 < man[args[1]].ships.length; i2++)
 				{
 					let one_field=[]
 					//création du field
 					one_field["name"]="\u200b"
 					one_field["inline"]=false
-					one_field["value"]="[id n°"+man[args[0]].ships[i2]["id"] +" => "+man[args[0]].ships[i2]["name"]+"\n https://starcitizen.tools"+man[args[0]].ships[i2]["link"]+"](https://starcitizen.tools"+man[args[0]].ships[i2]["link"]+")"
+					one_field["value"]="[id n°"+man[args[1]].ships[i2]["id"] +" => "+man[args[1]].ships[i2]["name"]+"\n https://starcitizen.tools"+man[args[1]].ships[i2]["link"]+"](https://starcitizen.tools"+man[args[1]].ships[i2]["link"]+")"
 					fields.push(one_field)
 
 				}
@@ -124,12 +125,12 @@ module.exports.run = async (client,message) =>{
 
 				var my_embed={
 					"embed": {
-						"title": man[args[0]].name,
-						"url": man[args[0]].links,
+						"title": man[args[1]].name,
+						"url": man[args[1]].links,
 						"color": 15179008,
-						"description": man[args[0]].links,
+						"description": man[args[1]].links,
 						"thumbnail": {
-							"url": man[args[0]].img
+							"url": man[args[1]].img
 						}, 
 						"fields": [
 						fields
@@ -151,7 +152,7 @@ module.exports.run = async (client,message) =>{
 }
 module.exports.help ={
 	name: "man_id",//nom de la commande
-	info: `Retourne la liste des appareils construit par le fabricant, "+man_id [x], ex "+man_id 2"`,//texte descriptif de la commande
+	info: `Retourne la liste des appareils construit par le fabricant, "+man_id [x]", ex "+man_id 2"`,//texte descriptif de la commande
 	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

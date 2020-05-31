@@ -28,11 +28,17 @@ module.exports.run = async(client,message,args) =>{
 				json_data=JSON.parse(data);
 
 				let list_ship="";
-
+				let fields=[];
 				json_data.forEach((ship)=>{
-					let new_line="ID: "+ship.id+"\n"+"> *Marque* :"+ship.man+"\n > *Nom* :    "+ship.name+"\n > *Emport* :    "+ship.emport+"\n\n";
+					//let new_line="ID: "+ship.id+"\n"+"> *Marque* :"+ship.man+"\n > *Nom* :    "+ship.name+"\n > *Emport* :    "+ship.emport+"\n\n";
 
-					//si le message fait moins de 2000 caractére
+					let one_field=[]
+					//création du field
+					one_field["name"]="*Marque* :"+ship.man
+					one_field["inline"]=false
+					one_field["value"]="ID: "+ship.id+"\n > *Nom* :    "+ship.name+"\n > *Emport* :    "+ship.emport+"\n\n"
+					fields.push(one_field)
+					/*//si le message fait moins de 2000 caractére
 					if((new_line.length+list_ship.length)<2000)
 					{
 						list_ship=list_ship+""+new_line;
@@ -45,14 +51,25 @@ module.exports.run = async(client,message,args) =>{
 						mes_test++;
 						list_ship=list_ship+""+new_line;
 						text[mes_test]=list_ship;
-					}
+					}*/
 				})
 
-				text.forEach((bloc)=>{
+				/*text.forEach((bloc)=>{
 					console.log(bloc.length)
 					switch_msg.response(client,message,bloc)
 
-				})
+				})*/
+				var my_embed={
+					"embed": {
+						"title": "Liste des vaisseaux pris en charge par MySCtools",
+						"url": "https://mysctools.ovh/",
+						"color": 15179008,
+						"fields": [
+						fields
+						]
+					} 
+				}
+				switch_msg.response(client,message,my_embed)
 
 			})
 	}

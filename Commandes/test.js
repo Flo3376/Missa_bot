@@ -23,7 +23,6 @@ module.exports.run = async (client,message,args) =>{
 		console.log(`Erreur(s) : ${switch_msg.error}`)
 		return
 	}
-
 };
 module.exports.help ={
 	name: "test",//nom de la commande
