@@ -9,3 +9,5 @@ db/log.txt
 db/members.json
 embed/to_bm.js
 embed/to_gm.js
+ecosystem.config.js
+process.json

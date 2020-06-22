@@ -6,7 +6,10 @@ var my_embed={
     "description": man['description'],
     "thumbnail": {
       "url": `https://mysctools.ovh/e107_plugins/sc_trad/img/${man['img']}.png`
-    },
+    }, 
+    "fields": [
+    fields
+    ]
   
  } 
   

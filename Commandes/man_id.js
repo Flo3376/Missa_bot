@@ -34,9 +34,6 @@ module.exports.run = async (client,message) =>{
 		//purge du tableau des ships
 		all_ships=[]
 
-		//on charge la methode request pour faire une demande post
-		//const request = require('request')
-
 		//chargement du parseur de page HTML
 		const cheerio = require('cheerio'),cheerioTableparser = require('cheerio-tableparser');
 
