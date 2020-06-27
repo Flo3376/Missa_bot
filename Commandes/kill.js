@@ -57,7 +57,7 @@ module.exports.run = async(client,message) =>{
 
 module.exports.help ={
 	name: "kill",//nom de la commande
-	info: `+kill [utilisateur][raison (optionelle)]\nEnvoie un utilisateur dans le salon AFK, ex: +kill @un_joueur 'va te calmer 30 secondes'`,//texte descriptif de la commande
+	info2: `+kill [utilisateur][raison (optionelle)]\nEnvoie un utilisateur dans le salon AFK, ex: +kill @un_joueur 'va te calmer 30 secondes'`,//texte descriptif de la commande
 	admin: true, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "text", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

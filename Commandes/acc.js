@@ -53,7 +53,7 @@ module.exports.run = async (client,message) =>{
 
 module.exports.help ={
 	name: "acc",//nom de la commande
-	info: `+acc\nSimule l'arrivé d'un joueur`,//texte descriptif de la commande
+	info2: `+acc\nSimule l'arrivé d'un joueur`,//texte descriptif de la commande
 	admin: true, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "text", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

@@ -2,7 +2,7 @@ module.exports.run = async (client, message) => {
 	const args = message.content.split(" ");
 
 	//chargement des paramêtres de cette commande
-	const param = client.commands.get('ask').help
+	const param = client.commands.get('handle').help
 
 	/*
 	*	initialisation d'un routeur entrant/sortant
@@ -122,8 +122,8 @@ module.exports.run = async (client, message) => {
 };
 
 module.exports.help = {
-	name: "ask",//nom de la commande
-	info: `+ask [Nom du joueur]\nPermet d'accéder au dossier spectrum d'un membre, exemple: +ask gm_bob`,//texte descriptif de la commande
+	name: "handle",//nom de la commande
+	info: `+handle [Nom du joueur]\nPermet d'accéder au dossier spectrum d'un membre, exemple: |handle gm_bob`,//texte descriptif de la commande
 	admin: true, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

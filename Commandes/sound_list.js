@@ -3,7 +3,7 @@ module.exports.run = async (client,message,args) =>{
 	let text=[];
 	let mes_test=0;
 	
-	let list_sound="En utilisant la commande +rh [x] ou x correspond au numéro d'un des sons, Missa vous jouera votre extrait\n\n";
+	let list_sound="En utilisant la commande +sound_play [x] ou x correspond au numéro d'un des sons, Missa vous jouera votre extrait\n\n";
 
 	count=0;
 	let rep_mp3 = fs.readdirSync("./mp3/");
@@ -62,7 +62,7 @@ module.exports.run = async (client,message,args) =>{
 
 module.exports.help ={
 	name: "sound_list",
-	info: `+sound_list\nVous donnera la liste compléte des extraits utilisable avec la commande +rh`,
+	info: `+sound_list\nVous donnera la liste compléte des extraits utilisable avec la commande +sound_play`,
 	admin: false,
 	channel: "both",
 };

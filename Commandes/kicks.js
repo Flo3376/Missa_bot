@@ -52,7 +52,7 @@ module.exports.run = async(client,message) =>{
 };
 module.exports.help ={
 	name: "kick",//nom de la commande
-	info: `+kick [utilisateur] [raison (optinnelle)]\nDéconnecte un utilisateur ex: +kick @un_joueur tu me casses les couilles`,//texte descriptif de la commande
+	info2: `+kick [utilisateur] [raison (optinnelle)]\nDéconnecte un utilisateur ex: +kick @un_joueur tu me casses les couilles`,//texte descriptif de la commande
 	admin: true, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "text", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

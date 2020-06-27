@@ -30,7 +30,7 @@ module.exports.run = async(client,message,args) =>{
 };
 module.exports.help ={
 	name: "diag",//nom de la commande
-	info: `+diag\n Retourne dans les consoles les tableaux monkeys_list et salon_list`,//texte descriptif de la commande
+	info2: `+diag\n Retourne dans les consoles les tableaux monkeys_list et salon_list`,//texte descriptif de la commande
 	admin: true, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"dm", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

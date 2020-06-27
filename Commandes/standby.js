@@ -39,7 +39,7 @@ module.exports.run = async(client,message,args) =>{
 
 module.exports.help ={
 	name: "standby",
-	info: `+standby\nPermet au bot de rester ou non dans un salon aprés son action sonore`,
+	info2: `+standby\nPermet au bot de rester ou non dans un salon aprés son action sonore`,
 	admin: true,
 	in:"dm", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

@@ -1,6 +1,6 @@
-module.exports.run = async (message, serverQueue) =>{
+module.exports.run = async (client,message) =>{
 	//chargement des paramêtres de cette commande
-	const param = client.commands.get('stop').help
+	const param = client.commands.get('play_skip').help
 
 	/*
 	*	initialisation d'un routeur entrant/sortant
@@ -17,10 +17,14 @@ module.exports.run = async (message, serverQueue) =>{
 	{
 		if (!message.member.voice.channel)
 		{
-			return switch_msg.response(client,message,"Vous devez être dans le salon vocal pour stopper la musique!")
+			return switch_msg.response(client,message,"Vous devez être dans le vocal pour pouvoir changer de musique!")
 		}
-		serverQueue.songs = [];
+		if (!serverQueue)
+		{
+			return switch_msg.response(client,message,"Pas d'autre musique dans la file d'attente!")
+		}
 		serverQueue.connection.dispatcher.end();
+		
 	}
 	else
 	{
@@ -29,12 +33,11 @@ module.exports.run = async (message, serverQueue) =>{
 		return
 	}
 	
-
 };
 
 module.exports.help ={
-	name: "stop",
-	info: `+stop\nCoupe la lecture de fichier audio youtube et effacera la playlist`,
+	name: "play_skip",
+	info: `+play_skip\nLancera la musique suivante de la playlist`,
 	admin: false,
 	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

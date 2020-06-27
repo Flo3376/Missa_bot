@@ -8,16 +8,23 @@ setInterval(async function() {
 	{
 		//on prépare l'objet monkeys
 		let salon= new salons_m();
-		//console.log("salon : "+salon)
+		//console.log("channel : "+channel)
 
 		//on recherche un correspondance avec un salon existant
 		let info = await salon.search_s(channel["id"]).then()
 		//si le salon n'exsite pas on le créé
 		if( info === null){result = await salon.create_s(channel).then();}
-		//sinon on le met à jours de toute façon
-		else{result = await salon.update_s(channel).then();}
+		//sinon on le met à jours si besoin
+		else
+		{
+			if(channel["name"]!==salon.name || channel["type"]!==salon.type || channel["id"]!==salon.id)
+			{
+				result = await salon.update_s(channel).then();
+				salon_list[channel["id"]]=salon;
+			}
+		}
 
-		salon_list[channel["id"]]=salon;
+		
 
 		//console.log(salon[channel["id"]]);
 	}
@@ -49,6 +56,8 @@ setInterval(async function() {
 			info = await monkey.update_m(new_data).then()
 			monkeys_list[usr.id]=monkey;
 			
+			
+			
 		}
 	}
-}, 300000);
+}, 30000);

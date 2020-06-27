@@ -16,17 +16,7 @@ module.exports.run = async (client,message,args) =>{
 	{"man":"Roberts Space Industries", "links":"https://starcitizen.tools/Roberts_Space_Industries_(manufacturer)","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Roberts_Space_Industries.png"},
 	{"man":"Tumbril Land Systems", "links":"https://starcitizen.tools/Tumbril_Land_Systems","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Tumbril_Land_Systems.png"},
 	{"man":"Tumbril Land Systems", "links":"https://starcitizen.tools/Tumbril_Land_Systems","img" : "https://mysctools.ovh/e107_plugins/sc_trad/img/Tumbril_Land_Systems.png"},
-
-
-
-
-
-
-
-
-
-
-	]
+]
 	
 	//on charge la methode request pour faire une demande post
 	const request = require('request')

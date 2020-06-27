@@ -12,6 +12,5 @@ var my_embed={
     ]
   
  } 
-  
 }
 

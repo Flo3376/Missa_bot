@@ -24,7 +24,7 @@ module.exports.run = async (client,message) =>{
 		const request = require('request')
 		let text=[];
 		let mes_test=0;
-		console.log('https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_minage.php')
+		//console.log('https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_minage.php')
 		request.post(
 			'https://mysctools.ovh/e107_plugins/sc_trad/page/request/mreq_minage.php',
 			(error, res, data) => {
@@ -36,30 +36,28 @@ module.exports.run = async (client,message) =>{
 					json_data=JSON.parse(data);
 
 					let min_info="";
-					console.log(json_data)
+					//console.log(json_data)
+					let fields=[];
 					//on parcours le json
 					json_data.forEach((Minage)=>{
-						let new_line="***Nom : "+Minage.name+"***\n"+"Nom commun : " +Minage.n_text+"\n"+"Prix de base : " +Minage.b_price+" aUEC/SCU\n"+Minage.text+"\n\n";
-						switch_msg.response(client,message,new_line)
-						//si le contenaire du bloc réponse est remplie de moin de 2000 caractére on continue à le remplir
-						if((new_line.length+min_info.length)<2000)
-						{
-							min_info=min_info+""+new_line;
-							text[mes_test]=min_info;
-						}
-						//sinon on ouvre un autre contenaire
-						else
-						{
-							min_info="";
-							mes_test++;
-							min_info=min_info+""+new_line;
-							text[mes_test]=min_info;
-						}
+						let one_field=[]
+						//création du field
+						one_field["name"]="***Nom :"+Minage.name+"*** (" +Minage.n_text+")"
+						one_field["inline"]=false
+						one_field["value"]="***\u200bPrix de base : " +Minage.b_price+" aUEC/SCU***\n"+Minage.text+"\u200b";
+						fields.push(one_field)
 					})
-					//on envoie les contenaires les uns aprés les autres
-					text.forEach((bloc)=>{
-						//switch_msg.response(client,message,bloc)
-					})
+					var my_embed={
+						"embed": {
+							"title": "Voici les cours de la bourse concernant les produits de minages:",
+							"url": "https://mysctools.ovh/",
+							"color": 15179008,
+							"fields": [
+							fields
+							]
+						} 
+					}
+					switch_msg.response(client,message,my_embed)
 				})
 	}
 	else
@@ -71,7 +69,7 @@ module.exports.run = async (client,message) =>{
 };
 module.exports.help ={
 	name: "minage",//nom de la commande
-	info: `+minage vous retournera les cours boursiers des différentes ressource minable`,//texte descriptif de la commande
+	info: `+minage vous retournera les cours boursiers des différentes ressources minables`,//texte descriptif de la commande
 	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

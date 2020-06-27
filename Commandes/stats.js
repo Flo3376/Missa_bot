@@ -68,7 +68,7 @@ module.exports.run = async (client,message, args) =>{
 
 module.exports.help ={
 	name: "stats",
-	info: `+stats\nVous permettra de connaitre les informations de membre sur discord`,
+	info2: `+stats\nVous permettra de connaitre les informations de membre sur discord`,
 	admin: false,
 	channel: "in_serv"
 };

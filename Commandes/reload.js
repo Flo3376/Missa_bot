@@ -40,7 +40,7 @@ module.exports.run = async(client,message,args) =>{
 };
 module.exports.help ={
 	name: "reload",
-	info: `+reload, active ou désactive l'autho-rechargement de tous les scripts `,
+	info2: `+reload, active ou désactive l'autho-rechargement de tous les scripts `,
 	admin: true,
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

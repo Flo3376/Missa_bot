@@ -45,7 +45,7 @@ module.exports.run = async (client,message,args) =>{
 }
 module.exports.help ={
 	name: "man",//nom de la commande
-	info: `+man Retourne la liste des fabricants`,//texte descriptif de la commande
+	info: `+man Retourne la liste des fabricants de vaisseaux`,//texte descriptif de la commande
 	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

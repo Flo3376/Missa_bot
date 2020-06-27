@@ -91,8 +91,8 @@ module.exports.run = async (client,message) =>{
 	}
 };
 module.exports.help ={
-	name: "fc",//nom de la commande
-	info: `+fc [id_ de l'appareil] [argent disponible]\n Vous retourner les produits les plus rentables à tradder avec les conditions que vous avez indiqué.\n ex +fc 8 5000\n les id sont disponibles en tapant la commande +ship_list`,//texte descriptif de la commande
+	name: "trading",//nom de la commande
+	info: `+trading [id_ de l'appareil] [argent disponible]\n Vous retourner les produits les plus rentables à tradder avec les conditions que vous avez indiqué.\n ex +fc 8 5000\n les id sont disponibles en tapant la commande +ship_list`,//texte descriptif de la commande
 	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "callback", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

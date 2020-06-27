@@ -149,7 +149,7 @@ module.exports.run = async (client,message) =>{
 }
 module.exports.help ={
 	name: "man_id",//nom de la commande
-	info: `Retourne la liste des appareils construit par le fabricant, "+man_id [x]", ex "+man_id 2"`,//texte descriptif de la commande
+	info: `Retourne la liste des appareils construits par le fabricant, "+man_id [x]", ex "+man_id 2"`,//texte descriptif de la commande
 	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"both", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

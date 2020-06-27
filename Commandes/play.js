@@ -136,7 +136,7 @@ module.exports.run = async (client,message) =>{
 
 module.exports.help ={
 	name: "play",
-	info: `+play [lien youtube]\nLancera la lecture **audio** d'un lien youtubre, ex : +play https://www.youtube.com/watch?v=vb_k04U3pNs .Attention Missa ne peux être que sur un salon. Si une musique est déjà en cours, celle que vous proposerez sera mis playlist.`,
+	info: `+play [lien youtube]\nLancera la lecture **audio** d'un lien youtubre, ex : +play https://www.youtube.com/watch?v=vb_k04U3pNs .Attention Missa ne peux être que sur un salon. Si une musique est déjà en cours, celle que vous proposerez sera mise playlist.`,
 	admin: false, //true/false cette commande ne peut être utilisé que par un administrateur
 	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

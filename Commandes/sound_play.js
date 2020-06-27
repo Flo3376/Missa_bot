@@ -1,7 +1,7 @@
 module.exports.run = async (client,message) =>{
 	const args = message.content.split(" ");
 	//chargement des paramêtres de cette commande
-	const param = client.commands.get('rh').help
+	const param = client.commands.get('sound_play').help
 
 	/*
 	*	initialisation d'un routeur entrant/sortant
@@ -93,8 +93,8 @@ module.exports.run = async (client,message) =>{
 };
 
 module.exports.help ={
-	name: "rh",
-	info: `+rh [numéro du préset]\nJouera un extrait de film. La liste des extraits est disponible en faisant +sound_list bruitage.., ex: +rh 5`,
+	name: "sound_play",
+	info: `+sound_play [numéro du préset]\nJouera un extrait de film. La liste des extraits est disponible en faisant +sound_list bruitage.., ex: +rh 5`,
 	admin: false,
 	in:"text", //text/dm/both la commande peu être appellé dans un salon textuel / en MP / les deux
 	out: "dm", //text/dm/callback la réponse à cette commande arrivera sur le salon / en MP / sur la source d'arrivé

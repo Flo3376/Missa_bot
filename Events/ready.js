@@ -1,6 +1,6 @@
 //si un event on ready arrive arrive (le boot a démarré et s'est connecté avec succés)
 module.exports =async(client) =>{
-	client.user.setPresence({activity:{name:"Ré écriture compléte du core du robot"}});
+	client.user.setPresence({activity:{name:"By BOB  | +help"}});
 
 	let  channels = client.channels.cache;
 
